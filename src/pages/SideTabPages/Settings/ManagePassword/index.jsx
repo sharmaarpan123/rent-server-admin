@@ -71,9 +71,7 @@ const ManagePassword = () => {
   };
 
   const submitHandler = catchAsync(async (data) => {
-    const res = await (admin?.roles?.includes("seller")
-      ? CHANGE_PASSWORD_AS_SELLER(data)
-      : CHANGE_PASSWORD(data));
+    const res = await CHANGE_PASSWORD(data);
 
     const success = checkResponse({
       res,

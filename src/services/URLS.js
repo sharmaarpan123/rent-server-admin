@@ -11,7 +11,7 @@ export default {
   LOG_OUT_AS_SELLER: "seller/logout",
   FORGET_PASSWORD_ADMIN: "/api/v1/admin/forgot",
   RESET_PASSWORD: "/api/v1/admin/reset",
-  CHANGE_PASSWORD: "auth/admin/changePassword",
+  CHANGE_PASSWORD: "/api/v1/admin/change-password",
   CHANGE_PASSWORD_AS_SELLER: "auth/seller/changePassword",
   ADMIN_UPDATE: "admin/editAdmin",
   GET_ADMIN_BY_ID: "/admin/getUserById/",
@@ -21,10 +21,9 @@ export default {
   DASHBOARD: "/api/v1/admin/dashboard",
   AGENCY_AND_MED_DASHBOARD: "subAdmin/dashboard",
 
-
   // QUERIES_LIST
 
-  QUERIES_LIST :"/api/v1/admin/query-list",
+  QUERIES_LIST: "/api/v1/admin/query-list",
 
   // UPLOAD FILE
 

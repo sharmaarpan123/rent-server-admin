@@ -53,17 +53,17 @@ const Dashboard = () => {
 
         {/* Charts Section */}
         <Row className="g-4">
-          <Col lg={7}>
+          <Col lg={12}>
             <div className="dashboard-card h-100">
               <div className="card-header">
-                <h5 className="mb-0">Revenue Overview</h5>
+                <h5 className="mb-0">Users signup's over time</h5>
               </div>
               <div className="card-body">
                 <AreaChart data={data} />
               </div>
             </div>
           </Col>
-          <Col lg={5}>
+          {/* <Col lg={5}>
             <div className="dashboard-card h-100">
               <div className="card-header">
                 <h5 className="mb-0">Booking Status</h5>
@@ -72,7 +72,7 @@ const Dashboard = () => {
                 <PieChart data={data} />
               </div>
             </div>
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     </section>

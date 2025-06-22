@@ -75,7 +75,7 @@ const Login = () => {
                   Email
                 </label>
                 <input
-                  type="tel"
+                  type="text"
                   className={`${styles.formControl} form-control`}
                   placeholder="example@gmail.com"
               

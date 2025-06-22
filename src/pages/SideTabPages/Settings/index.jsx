@@ -45,17 +45,10 @@ const Settings = () => {
                       <li className="py-3 d-flex align-items-center gap-10">
                         <p className="m-0 themePink fw-sbold w-25">Name:</p>
                         <h6 className="m-0 text-muted fw-bold w-75">
-                          {admin?.name}
+                          {admin?.name || "Super Admin"}
                         </h6>
                       </li>
-                      <li className="py-3 d-flex align-items-center gap-10">
-                        <p className="m-0 themePink fw-sbold w-25">
-                          Phone Number:
-                        </p>
-                        <h6 className="m-0 text-muted fw-bold w-75">
-                          +91 {admin?.phoneNumber}
-                        </h6>
-                      </li>
+
                       <li className="py-3 d-flex align-items-center gap-10">
                         <p className="m-0 themePink fw-sbold w-25">Email:</p>
                         <h6 className="m-0 text-muted fw-bold w-75">
