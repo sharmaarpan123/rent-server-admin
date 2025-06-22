@@ -22,6 +22,11 @@ export const CHANGE_PASSWORD_AS_SELLER = (data) =>
 // upload file
 export const UPLOAD_FILE = (data) => Axios.post(API_URL.UPLOAD_FILE, data);
 
+// query Management 
+
+export const QUERIES_LIST = (data) => Axios.post(API_URL.QUERIES_LIST, data);
+
+
 // dasbhoard
 
 export const DASHBOARD = (data) => Axios.get(API_URL.DASHBOARD, data);

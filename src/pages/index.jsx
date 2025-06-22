@@ -12,9 +12,6 @@ import BrandDetails from "./SideTabPages/Brand/detail";
 import ContentPage from "./SideTabPages/ContentPages";
 import AddContentPage from "./SideTabPages/ContentPages/add";
 import Dashboard from "./SideTabPages/Dashboard";
-import DealCategory from "./SideTabPages/DealCategory";
-import AddEditDealCategory from "./SideTabPages/DealCategory/add";
-import DealCategoryDetails from "./SideTabPages/DealCategory/detail";
 import MyAgencyDealsAsMed from "./SideTabPages/DealManagement/MyAgencyDeals";
 import MyAgencyDealDetailsAsMed from "./SideTabPages/DealManagement/MyAgencyDeals/detail";
 import DealManagement from "./SideTabPages/DealManagement/MyDealsAsAgency";
@@ -65,6 +62,7 @@ import ManagePassword from "./SideTabPages/Settings/ManagePassword";
 import SystemAccess from "./SideTabPages/SystemAccess";
 import LinkedSubAdmin from "./SideTabPages/SystemAccess/LinkedMed";
 import AddSubAdmin from "./SideTabPages/SystemAccess/add";
+import QueryManagement from "./SideTabPages/QueryManagement";
 export const publicRoutes = [
   { path: "privacy-policy", component: <PrivacyPolicy /> },
 ];
@@ -83,6 +81,7 @@ export const privateRoutes = [
     title: "Privacy Policy",
   },
   { path: "/dashboard", component: <Dashboard />, title: "Dashboard" },
+  { path: "/manage-query", component: <QueryManagement />, title: "Queries" },
   { path: "/platform", component: <PlatForm />, title: "Platform" },
   { path: "/platform/add", component: <AddPlatForm />, title: "Add Platform" },
   {
@@ -95,22 +94,8 @@ export const privateRoutes = [
     component: <PlatFormDetail />,
     title: "Platform Details",
   },
-  { path: "/category", component: <DealCategory />, title: "Deal Categories" },
-  {
-    path: "/category/add",
-    component: <AddEditDealCategory />,
-    title: "Add Deal Category",
-  },
-  {
-    path: "/category/edit/:id",
-    component: <AddEditDealCategory />,
-    title: "Edit Deal Category",
-  },
-  {
-    path: "/category/details/:id",
-    component: <DealCategoryDetails />,
-    title: "Category Details",
-  },
+
+ 
   { path: "/brand", component: <Brand />, title: "Brands" },
   { path: "/brand/add", component: <AddEditBrand />, title: "Add Brand" },
   { path: "/brand/edit/:id", component: <AddEditBrand />, title: "Edit Brand" },

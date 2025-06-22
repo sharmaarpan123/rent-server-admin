@@ -12,6 +12,7 @@ import ConfirmationPop from "../../../components/Modals/ConfirmationPop";
 import dataHandler from "../../../hooks/dataHandler";
 import {
   DEAL_CATEGORY_LIST,
+  QUERIES_LIST,
   UPDATE_STATUS_DEAL_CATEGORY,
 } from "../../../services/ApiCalls";
 import {
@@ -27,7 +28,7 @@ import CustomPagination from "../../../components/Common/CustomPagination";
 import Filter from "../../../components/Common/Filter";
 import { useSelector } from "react-redux";
 
-const DealCategory = () => {
+const QueryManagement = () => {
   const {
     setBody,
     body,
@@ -41,7 +42,8 @@ const DealCategory = () => {
     deleteHandler,
     statusChangeHandler,
   } = dataHandler({
-    api: DEAL_CATEGORY_LIST,
+    api: QUERIES_LIST,
+    dataToSet: (data) => data?.data?.data,
   });
 
   const { admin } = useSelector((s) => s.login);
@@ -55,70 +57,38 @@ const DealCategory = () => {
       },
     },
     {
-      head: "Name",
+      head: "User Name",
       accessor: "name",
       component: (item, key, arr) => (
         <p className="m-0 themePink fw-sbold">
-          {capitalizedFirstAlphaBet(item.name)}
+          {capitalizedFirstAlphaBet(item?.user?.userName)}
         </p>
       ),
     },
     {
-      head: "Image",
+      head: "User Image",
       accessor: "image",
       component: (item, key, arr) => (
         <img
-          src={item.image || noImg}
+          src={item?.user?.profileImage || noImg}
           style={{ width: 100, height: 80, objectFit: "contain" }}
         />
       ),
     },
     {
+      head: "Email",
+      accessor: "email",
+    },
+    {
+      head: "Concern",
+      accessor: "concern",
+    },
+    
+    {
       head: "Date || Time ",
       accessor: "createdAt",
       component: (item, key, arr) => (
         <>{moment(item.createdAt).format("DD-MM-YYYY  hh:mm:ss A")}</>
-      ),
-    },
-    ...(isSuperAdmin(admin)
-      ? [
-          {
-            head: "Status",
-            accessor: "",
-            component: (item, index) => (
-              <TableToggle
-                Options={activeInActiveStatusOptions}
-                value={item.isActive ? "1" : "0"}
-                classNames={item.isActive ? "bg-success" : "bg-danger"}
-                style={{
-                  color: item.isActive ? "green" : "red",
-                  width: 120,
-                }}
-                onChange={(e) =>
-                  statusChangeHandler(
-                    () =>
-                      UPDATE_STATUS_DEAL_CATEGORY({
-                        dealCategoryId: item._id,
-                        status: e.target.value === "1",
-                      }),
-                    index,
-                    "isActive",
-                    !item.isActive
-                  )
-                }
-              />
-            ),
-          },
-        ]
-      : []),
-    {
-      head: "Action",
-      accessor: "Action",
-      component: (item) => (
-        <TableActions
-          editUrl={isSuperAdmin(admin) ? `/category/edit/${item._id}` : null}
-          viewLink={`/category/details/${item._id}`}
-        />
       ),
     },
   ];
@@ -137,6 +107,7 @@ const DealCategory = () => {
                       searchHandler={searchHandler}
                       setBody={setBody}
                       statusFilterOptionArr={activeInactiveOptions}
+                      showStatusFilter={false}
                     />
                   </ul>
                 </div>
@@ -175,4 +146,4 @@ const DealCategory = () => {
   );
 };
 
-export default DealCategory;
+export default QueryManagement;

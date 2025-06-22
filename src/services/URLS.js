@@ -21,6 +21,11 @@ export default {
   DASHBOARD: "/api/v1/admin/dashboard",
   AGENCY_AND_MED_DASHBOARD: "subAdmin/dashboard",
 
+
+  // QUERIES_LIST
+
+  QUERIES_LIST :"/api/v1/admin/query-list",
+
   // UPLOAD FILE
 
   UPLOAD_FILE: "/fileUpload",
