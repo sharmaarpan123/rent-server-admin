@@ -25,7 +25,7 @@ const Dashboard = () => {
   const getDashBoardData = catchAsync(async () => {
     setLoader(true);
 
-    const res = await DASHBOARD();
+    // const res = await DASHBOARD();
 
     // checkResponse({ res, setData, setLoader });
   }, setLoader);
