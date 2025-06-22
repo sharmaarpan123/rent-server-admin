@@ -27,7 +27,7 @@ const Dashboard = () => {
 
     const res = await DASHBOARD();
 
-    checkResponse({ res, setData, setLoader });
+    // checkResponse({ res, setData, setLoader });
   }, setLoader);
 
   useEffect(() => {
