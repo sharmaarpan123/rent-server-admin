@@ -1,0 +1,28 @@
+.csvDataListing {
+  .singleData {
+    border: 2px black solid;
+    margin-bottom: 8px;
+    border-radius: 18px;
+    // background-color: white;
+    p {
+      word-break: break-all;
+    }
+  }
+}
+
+.guideLineBox {
+    
+  button {
+    background: #ff00bf !important;
+    border-color: #ff00bf;
+    font-size: 14px;
+    min-width: 130px;
+    color: white !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  &:has(a.active) button {
+    background-color: #0b4897;
+  }
+}
