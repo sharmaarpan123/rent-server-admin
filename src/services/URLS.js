@@ -1,29 +1,50 @@
 export default {
   API_URL: import.meta.env.VITE_APP_API_URL,
-  SCRAPPER_URL: "http://127.0.0.1:5000/fetch-image",
 
-  // ADMIN
+  // ADMIN auth
   LOGIN_ADMIN: "/api/v1/admin/login",
+  FORGET_PASSWORD_ADMIN: "/api/v1/admin/forgot",
+  RESET_PASSWORD: "/api/v1/admin/reset",
+  CHANGE_PASSWORD: "/api/v1/admin/change-password",
+
+  DASHBOARD: "/api/v1/admin/dashboard",
+
+  //    USER
+  USER_LIST: "/api/v1/admin/user-list",
+  USER_ADD: "/api/v1/admin/manual-user",
+  GET_USER_BY_ID: "/api/v1/admin/view/",
+  BLOCK_USER: "/api/v1/admin/block/",
+
+  // queries
+
+  QUERIES_LIST: "/api/v1/admin/query-list",
+
+  // shops manage
+
+  SHOPS_LIST: "/api/v1/admin/shop-list",
+  SHOP_ADD: "/api/v1/admin/shop-add",
+  SHOP_VIEW: "/api/v1/admin/shop-view",
+  SHOP_DELETE: "/api/v1/admin/shop-delete",
+  SHOP_EDIT: "/api/v1/admin/shop-edit",
+
+  // not used yet
+
+  SCRAPPER_URL: "http://127.0.0.1:5000/fetch-image",
   LOGIN_SELLER: "auth/seller/singIn",
   ME_QUERY: "admin/me",
   SELLER_ME_QUERY: "seller/me",
   LOG_OUT: "admin/logout",
   LOG_OUT_AS_SELLER: "seller/logout",
-  FORGET_PASSWORD_ADMIN: "/api/v1/admin/forgot",
-  RESET_PASSWORD: "/api/v1/admin/reset",
-  CHANGE_PASSWORD: "/api/v1/admin/change-password",
+
   CHANGE_PASSWORD_AS_SELLER: "auth/seller/changePassword",
   ADMIN_UPDATE: "admin/editAdmin",
   GET_ADMIN_BY_ID: "/admin/getUserById/",
 
   // dashboard
 
-  DASHBOARD: "/api/v1/admin/dashboard",
   AGENCY_AND_MED_DASHBOARD: "subAdmin/dashboard",
 
   // QUERIES_LIST
-
-  QUERIES_LIST: "/api/v1/admin/query-list",
 
   // UPLOAD FILE
 
@@ -128,10 +149,8 @@ export default {
 
   ////////////////////////////////// this api are already imported at some where so no time remove that other wise it will give errors
 
-  // ADD USER
-  USER_LIST: "/api/v1/admin/user-list",
   USER_STATUS_CHANGE: "/admin/user/updateStatus",
-  GET_USER_BY_ID: "/api/v1/admin/view/",
+
   UPDATE_USER: "/admin/user/updateUser",
   // ADD_USER: "/store/adduser",
   // DELETE_USER: "/store/removeuser",

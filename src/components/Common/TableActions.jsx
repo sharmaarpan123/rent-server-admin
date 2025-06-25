@@ -6,12 +6,9 @@ const TableActions = ({
   editUrl,
   setDeleteModel,
   viewLink,
-  acceptHandler,
-  rejectHandler,
-  reviewAcceptHandler,
-  reviewRejectHandler,
   viewButtonText,
-  ActionsButtons,
+  isBlocked,
+  blockUnBlockHandler,
 }) => {
   return (
     <div className="actionBtn d-flex align-items-center gap-10 ">
@@ -49,7 +46,9 @@ const TableActions = ({
       {viewLink && (
         <Link to={viewLink} className="border-0 p-0" variant="transparent">
           {viewButtonText ? (
-            <Button className={`primary ${styles.actionButton} ` }>{viewButtonText}</Button>
+            <Button className={`primary ${styles.actionButton} `}>
+              {viewButtonText}
+            </Button>
           ) : (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -68,6 +67,72 @@ const TableActions = ({
           )}
         </Link>
       )}
+
+      {blockUnBlockHandler && (
+        <>
+          {!isBlocked ? (
+            <span
+              onClick={blockUnBlockHandler}
+              className={` icn me-1 cursor-pointer`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="white"
+              >
+                <circle cx="12" cy="12" r="9" stroke="red" strokeWidth="1.5" />
+                <line
+                  x1="7"
+                  y1="17"
+                  x2="17"
+                  y2="7"
+                  stroke="red"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
+          ) : (
+         <span className={`${styles.icn} ${styles.stroke} icn me-1`}>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="25"
+    height="25"
+    viewBox="0 0 24 24"
+    fill="green"
+  >
+    <path
+      d="M8 11V7C8 5.34315 9.34315 4 11 4C12.6569 4 14 5.34315 14 7"
+      stroke="white"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+    <rect
+      x="5"
+      y="11"
+      width="14"
+      height="10"
+      rx="2"
+      stroke="white"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M10 16L11.5 17.5L14 15"
+      stroke="white"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+</span>
+
+
+          )}
+        </>
+      )}
+
       {setDeleteModel && (
         <Button
           onClick={() => setDeleteModel()}
@@ -104,49 +169,6 @@ const TableActions = ({
           </svg>
         </Button>
       )}
-      {acceptHandler && (
-        <button
-          onClick={acceptHandler}
-          className={`btn btn-success ${styles.btnXs} mx-1`}
-        >
-          Accept
-        </button>
-      )}
-
-      {rejectHandler && (
-        <button
-          onClick={rejectHandler}
-          className={`btn btn-danger ${styles.btnXs} mx-1`}
-        >
-          Reject
-        </button>
-      )}
-
-      {reviewAcceptHandler && (
-        <button
-          onClick={reviewAcceptHandler}
-          className={`btn btn-outline-success ${styles.btnXs} mx-1`}
-        >
-          Accept Review
-        </button>
-      )}
-
-      {reviewRejectHandler && (
-        <button
-          onClick={reviewRejectHandler}
-          className={`btn btn-outline-danger ${styles.btnXs} mx-1`}
-        >
-          Reject Review
-        </button>
-      )}
-
-      {ActionsButtons?.map((item) => {
-        return (
-          <Link to={item?.link} className="border-0 p-0" variant="transparent">
-            <Button  className={`primary ${styles.actionButton}`}>{item?.text}</Button>
-          </Link>
-        );
-      })}
     </div>
   );
 };

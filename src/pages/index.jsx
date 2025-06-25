@@ -63,6 +63,8 @@ import SystemAccess from "./SideTabPages/SystemAccess";
 import LinkedSubAdmin from "./SideTabPages/SystemAccess/LinkedMed";
 import AddSubAdmin from "./SideTabPages/SystemAccess/add";
 import QueryManagement from "./SideTabPages/QueryManagement";
+import ShopManagement from "./SideTabPages/ShopManagement";
+import AddEditShops from "./SideTabPages/ShopManagement/add";
 export const publicRoutes = [
   { path: "privacy-policy", component: <PrivacyPolicy /> },
 ];
@@ -82,6 +84,43 @@ export const privateRoutes = [
   },
   { path: "/dashboard", component: <Dashboard />, title: "Dashboard" },
   { path: "/manage-query", component: <QueryManagement />, title: "Queries" },
+  { path: "/manage-user", component: <ManageUser />, title: "Manage Users" },
+  { path: "/manage-user/add", component: <AddEditUser />, title: "Add User" },
+  {
+    path: "/manage-user/edit/:id",
+    component: <AddEditUser />,
+    title: "Edit User",
+  },
+  {
+    path: "/manage-user/detail/:id",
+    component: <UserDetail />,
+    title: "User Details",
+  },
+  {
+    path: "/manage-shops",
+    component: <ShopManagement />,
+    title: "Manage Shops",
+  },
+  {
+    path: "/manage-shops/add",
+    component: <AddEditShops />,
+    title: "Add Shops",
+  },
+  {
+    path: "/manage-shops/edit/:id",
+    component: <AddEditShops />,
+    title: "Edit Shops",
+  },
+  {
+    path: "/settings/edit-profile",
+    component: <EditProfile />,
+  },
+  {
+    path: "/settings/password",
+    component: <ManagePassword />,
+  },
+
+  // not used yet this /////////////////******************* */
   { path: "/platform", component: <PlatForm />, title: "Platform" },
   { path: "/platform/add", component: <AddPlatForm />, title: "Add Platform" },
   {
@@ -95,7 +134,6 @@ export const privateRoutes = [
     title: "Platform Details",
   },
 
- 
   { path: "/brand", component: <Brand />, title: "Brands" },
   { path: "/brand/add", component: <AddEditBrand />, title: "Add Brand" },
   { path: "/brand/edit/:id", component: <AddEditBrand />, title: "Edit Brand" },
@@ -207,18 +245,6 @@ export const privateRoutes = [
     component: <AddEditModule />,
     title: "Edit Module",
   },
-  { path: "/manage-user", component: <ManageUser />, title: "Manage Users" },
-  { path: "/manage-user/add", component: <AddEditUser />, title: "Add User" },
-  {
-    path: "/manage-user/edit/:id",
-    component: <AddEditUser />,
-    title: "Edit User",
-  },
-  {
-    path: "/manage-user/detail/:id",
-    component: <UserDetail />,
-    title: "User Details",
-  },
 
   {
     path: "/notifications",
@@ -250,7 +276,7 @@ export const privateRoutes = [
     component: <LinkedSeller />,
     title: "Edit Seller",
   },
-  // not used yet this /////////////////******************* */
+
   {
     path: "/service-provider/register",
     component: <RegisterServiceProvider />,
@@ -329,14 +355,7 @@ export const privateRoutes = [
     path: "/settings",
     component: <Settings />,
   },
-  {
-    path: "/settings/edit-profile",
-    component: <EditProfile />,
-  },
-  {
-    path: "/settings/password",
-    component: <ManagePassword />,
-  },
+
   {
     path: "/faq",
     component: <Faq />,

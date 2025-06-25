@@ -72,7 +72,7 @@ const ForgetPassword = ({}) => {
                 </svg>
               </Link>
             </div>
-            <h4 className="m-0 fw-sbold themeClr">Forgot Password</h4>
+            <h4 className="m-0 fw-sbold ">Forgot Password</h4>
           </div>
           <Form
             className={`${styles.form} pt-lg-4 pt-1`}
@@ -82,7 +82,7 @@ const ForgetPassword = ({}) => {
               <Col lg="12" className="my-2">
                 <label
                   htmlFor=""
-                  className="form-label m-0 pb-1 themeClr fw-sbold"
+                  className="form-label m-0 pb-1  fw-sbold"
                 >
                   Email ID
                 </label>

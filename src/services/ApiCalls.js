@@ -1,8 +1,40 @@
 import { makeQueryFromData } from "../utilities/utilities";
 import Axios from "./Axios";
 import API_URL from "./URLS";
-
+// AUTH ADMIN
 export const LOGIN_ADMIN = (data) => Axios.post(API_URL.LOGIN_ADMIN, data);
+export const FORGET_PASSWORD_ADMIN = (data) =>
+  Axios.post(API_URL.FORGET_PASSWORD_ADMIN, data);
+export const RESET_PASSWORD = (data) =>
+  Axios.post(API_URL.RESET_PASSWORD, data);
+export const CHANGE_PASSWORD = (data) =>
+  Axios.post(API_URL.CHANGE_PASSWORD, data);
+
+// DASHBOARD
+
+export const DASHBOARD = (data) => Axios.get(API_URL.DASHBOARD, data);
+
+// query Management
+
+export const QUERIES_LIST = (data) => Axios.post(API_URL.QUERIES_LIST, data);
+//USERS
+export const USER_LIST = (data) => Axios.post(API_URL.USER_LIST, data);
+export const GET_USER_BY_ID = (data) =>
+  Axios.get(API_URL.GET_USER_BY_ID + data);
+export const USER_ADD = (data) => Axios.post(API_URL.USER_ADD, data);
+
+export const BLOCK_UNBLOCK_USER = (id) => Axios.put(API_URL.BLOCK_USER + id);
+
+// SHOPS
+
+export const SHOPS_LIST = (data) => Axios.post(API_URL.SHOPS_LIST, data);
+export const SHOP_ADD = (data) => Axios.post(API_URL.SHOP_ADD, data);
+export const SHOP_VIEW = (data) => Axios.post(API_URL.SHOP_VIEW, data);
+export const SHOP_DELETE = (data) => Axios.post(API_URL.SHOP_DELETE, data);
+export const SHOP_EDIT = (data) => Axios.post(API_URL.SHOP_EDIT, data);
+
+////////////////////////////////// this api are already imported at some where so no time remove that other wise it will give errors
+
 export const LOGIN_SELLER = (data) => Axios.post(API_URL.LOGIN_SELLER, data);
 export const ME_QUERY = (data) => Axios.post(API_URL.ME_QUERY, data);
 export const SELLER_ME_QUERY = (data) =>
@@ -10,26 +42,15 @@ export const SELLER_ME_QUERY = (data) =>
 export const LOG_OUT = (data) => Axios.post(API_URL.LOG_OUT, data);
 export const LOG_OUT_AS_SELLER = (data) =>
   Axios.post(API_URL.LOG_OUT_AS_SELLER, data);
-export const FORGET_PASSWORD_ADMIN = (data) =>
-  Axios.post(API_URL.FORGET_PASSWORD_ADMIN, data);
-export const RESET_PASSWORD = (data) =>
-  Axios.post(API_URL.RESET_PASSWORD, data);
-export const CHANGE_PASSWORD = (data) =>
-  Axios.post(API_URL.CHANGE_PASSWORD, data);
+
 export const CHANGE_PASSWORD_AS_SELLER = (data) =>
   Axios.post(API_URL.CHANGE_PASSWORD_AS_SELLER, data);
 
 // upload file
 export const UPLOAD_FILE = (data) => Axios.post(API_URL.UPLOAD_FILE, data);
 
-// query Management 
-
-export const QUERIES_LIST = (data) => Axios.post(API_URL.QUERIES_LIST, data);
-
-
 // dasbhoard
 
-export const DASHBOARD = (data) => Axios.get(API_URL.DASHBOARD, data);
 export const AGENCY_AND_MED_DASHBOARD = (data) =>
   Axios.post(API_URL.AGENCY_AND_MED_DASHBOARD, data);
 
@@ -188,13 +209,9 @@ export const ADD_MODULE = (data) => Axios.post(API_URL.ADD_MODULE, data);
 
 export const UPDATE_MODULE = (data) => Axios.post(API_URL.UPDATE_MODULE, data);
 
-////////////////////////////////// this api are already imported at some where so no time remove that other wise it will give errors
-
 // user
 // export const ADD_USER = (data) => Axios.post(API_URL.ADD_USER, data);
-export const USER_LIST = (data) => Axios.post(API_URL.USER_LIST, data);
-export const GET_USER_BY_ID = (data) =>
-  Axios.get(API_URL.GET_USER_BY_ID + data);
+
 export const UPDATE_USER = (data) => Axios.post(API_URL.UPDATE_USER, data);
 // export const DELETE_USER = (data) => Axios.post(API_URL.DELETE_USER, data);
 export const USER_STATUS_CHANGE = (data) =>

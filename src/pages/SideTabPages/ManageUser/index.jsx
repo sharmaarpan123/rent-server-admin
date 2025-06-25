@@ -9,12 +9,17 @@ import Filter from "../../../components/Common/Filter";
 import TableActions from "../../../components/Common/TableActions";
 import Toggle from "../../../components/Common/Toggle";
 import dataHandler from "../../../hooks/dataHandler";
-import { USER_LIST, USER_STATUS_CHANGE } from "../../../services/ApiCalls";
+import {
+  BLOCK_UNBLOCK_USER,
+  USER_LIST,
+  USER_STATUS_CHANGE,
+} from "../../../services/ApiCalls";
 import {
   activeInactiveOptions,
   ADMIN_ROLE_TYPE_ENUM,
 } from "../../../utilities/const";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const ManageUser = () => {
   const {
@@ -98,9 +103,17 @@ const ManageUser = () => {
     {
       head: "Action",
       accessor: "Action",
-      component: (item) => (
+      component: (item, ind) => (
         <TableActions
-          // editUrl={`/manage-user/edit/${item._id}`}
+          blockUnBlockHandler={() =>
+            statusChangeHandler(
+              () => BLOCK_UNBLOCK_USER(item?._id),
+              ind,
+              "isBlock",
+              !item?.isBlock
+            )
+          }
+          isBlocked={item?.isBlock}
           viewLink={"/manage-user/detail/" + item?._id}
         />
       ),
@@ -122,6 +135,19 @@ const ManageUser = () => {
                     showStatusFilter={false}
                     statusFilterOptionArr={activeInactiveOptions}
                   />
+                </div>
+                <div className="right">
+                  <ul className="list-unstyled ps-0 mb-0 d-flex align-items-center gap-10 flex-wrap">
+                    <li className="">
+                      <Link
+                        to={"/manage-user/add"}
+                        className="d-flex btn btn-primary align-items-center justify-content-center fw-sbold commonBtn"
+                        style={{ height: 40, minWidth: 100, fontSize: 12 }}
+                      >
+                        Add New User
+                      </Link>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </Col>

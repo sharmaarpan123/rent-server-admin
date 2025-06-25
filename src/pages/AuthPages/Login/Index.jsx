@@ -59,7 +59,7 @@ const Login = () => {
       <div className="formInner position-relative px-lg-3">
         <div className="w-100 inner">
           <div className="top py-2">
-            <h4 className="m-0 fw-sbold themeClr">Log In</h4>
+            <h4 className="m-0 fw-sbold ">Log In</h4>
           </div>
 
           <Form
@@ -70,7 +70,7 @@ const Login = () => {
               <Col lg="12" className="my-2">
                 <label
                   htmlFor="Email ID / Phone number"
-                  className="form-label m-0 pb-1 themeClr fw-sbold"
+                  className="form-label m-0 pb-1  fw-sbold"
                 >
                   Email
                 </label>
@@ -88,7 +88,7 @@ const Login = () => {
               <Col lg="12" className="my-2">
                 <label
                   htmlFor=""
-                  className="form-label m-0 pb-1 themeClr fw-sbold"
+                  className="form-label m-0 pb-1  fw-sbold"
                 >
                   Password
                 </label>

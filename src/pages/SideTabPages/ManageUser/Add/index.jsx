@@ -10,13 +10,17 @@ import { Controller, useForm } from "react-hook-form";
 import PhoneInput from "react-phone-input-2";
 import { z } from "zod";
 import Toggle from "../../../../components/Common/Toggle";
-import { GET_USER_BY_ID, UPDATE_USER } from "../../../../services/ApiCalls";
+import {
+  GET_USER_BY_ID,
+  UPDATE_USER,
+  USER_ADD,
+} from "../../../../services/ApiCalls";
 import { catchAsync, checkResponse } from "../../../../utilities/utilities";
 
 const getSchema = (editMode) =>
   z
     .object({
-      name: z
+      userName: z
         .string()
         .min(1, { message: "Name is required" })
         .max(35, { message: "Name must be less than 35 characters" }),
@@ -25,14 +29,12 @@ const getSchema = (editMode) =>
         .min(1, { message: "Email is required" })
         .trim()
         .email("Invalid email address"),
-      password: z.string().optional(),
-      phoneNumber: z.string().min(1, { message: "Phone number is required" }),
-      status: z.boolean({
-        message: "This field is required",
-        required_error: "This field is required",
-        invalid_type_error: "This field is required!",
+      password: z
+        .string({ message: "Password is required" })
+        .min(6, { message: "Password must contain 6 characters" }),
+      gender: z.nativeEnum(["male", "female", "others"], {
+        invalid_type_error: "Please select the gender",
       }),
-      passwordToggle: z.boolean(), // this for the edit mode
     })
     .refine(
       (data) => {
@@ -66,35 +68,23 @@ const AddEditUser = () => {
     watch,
   } = useForm({
     resolver: zodResolver(schema),
-    defaultValues: {
-      status: "active",
-      passwordToggle: false,
-    },
+    defaultValues: {},
     values: {
-      status: userDetails?.isActive,
-      phoneNumber: userDetails?.phoneNumber
-        ? "91" + userDetails?.phoneNumber
-        : "",
       email: userDetails?.email || "",
-      name: userDetails?.name || "",
-      passwordToggle: false,
+      userName: userDetails?.email || "",
+      gender: userDetails?.email || "male",
+      password: "",
     },
   });
 
   const submitHandler = catchAsync(async (data) => {
     const body = {
       ...data,
-      userId: id,
-      phoneNumber: data.phoneNumber.replace("91", ""),
     };
-
-    if (!body.passwordToggle) {
-      delete body.password;
-    }
 
     delete body.passwordToggle;
 
-    const res = await UPDATE_USER(body);
+    const res = await USER_ADD(body);
 
     const success = checkResponse({ res, showSuccess: true });
 
@@ -154,20 +144,47 @@ const AddEditUser = () => {
                           htmlFor=""
                           className="form-label fw-sbold text-muted ps-2 m-0"
                         >
-                          Name
+                          User Name
                         </label>
                         <input
                           type="text"
                           placeholder="Enter Name"
                           className="form-control"
-                          {...register("name")}
+                          {...register("userName")}
                         />
-                        {errors?.name && (
+                        {errors?.userName && (
                           <p className="text-danger m-0">
-                            {errors?.name?.message}
+                            {errors?.userName?.message}
                           </p>
                         )}
                       </div>
+
+                      <div className="py-2">
+                        <label
+                          htmlFor=""
+                          className="form-label fw-sbold text-muted ps-2 m-0"
+                        >
+                          Gender
+                        </label>
+                        <select
+                          placeholder="Enter Name"
+                          className="form-control"
+                          {...register("gender")}
+                        >
+                          {["male", "female", "others"]?.map((item) => {
+                            return <option>{item}</option>;
+                          })}
+                        </select>
+
+                        {errors?.userName && (
+                          <p className="text-danger m-0">
+                            {errors?.userName?.message}
+                          </p>
+                        )}
+                      </div>
+                    </Col>
+
+                    <Col lg="5" md="6" className="my-2">
                       <div className="py-2">
                         <label
                           htmlFor=""
@@ -207,108 +224,49 @@ const AddEditUser = () => {
                         </div>
                       )}
                       {(!id || watch("passwordToggle")) && (
-                        <div className="py-2">
-                          <label
-                            htmlFor=""
-                            className="form-label fw-sbold text-muted ps-2 m-0"
-                          >
-                            Password
-                          </label>
-                          <div className="iconWithText position-relative">
-                            <input
-                              type={!showPassWord && "password"}
-                              placeholder="*******************"
-                              className="form-control pe-4"
-                              {...register("password")}
-                            />
-                            {errors?.password && (
-                              <p className="text-danger m-0">
-                                {errors?.password?.message}
-                              </p>
-                            )}
-                            <Button
-                              variant="transparent"
-                              style={{ right: 8, top: 22 }}
-                              onClick={() => setShowPassword((p) => !p)}
-                              className="border-0 p-0 position-absolute icn "
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="15"
-                                height="11"
-                                viewBox="0 0 15 11"
-                                fill="none"
-                              >
-                                <path
-                                  d="M9.23727 5.82515C9.23727 6.197 9.127 6.5605 8.92041 6.86968C8.71382 7.17886 8.42019 7.41984 8.07664 7.56214C7.7331 7.70444 7.35507 7.74167 6.99037 7.66913C6.62566 7.59658 6.29066 7.41752 6.02772 7.15458C5.76478 6.89164 5.58572 6.55664 5.51318 6.19194C5.44063 5.82723 5.47786 5.4492 5.62016 5.10566C5.76247 4.76211 6.00344 4.46848 6.31263 4.26189C6.62181 4.0553 6.98531 3.94504 7.35716 3.94504C7.85579 3.94504 8.33401 4.14312 8.68659 4.49571C9.03918 4.8483 9.23727 5.32651 9.23727 5.82515ZM14.1694 6.1385C14.0566 6.32651 11.437 10.8388 7.35716 10.8388C3.27732 10.8388 0.657706 6.32651 0.5449 6.1385C0.489895 6.04323 0.460938 5.93515 0.460938 5.82515C0.460937 5.71514 0.489895 5.60706 0.5449 5.51179C0.657706 5.32378 3.27732 0.811523 7.35716 0.811523C11.437 0.811523 14.0566 5.32378 14.1694 5.51179C14.2244 5.60706 14.2534 5.71514 14.2534 5.82515C14.2534 5.93515 14.2244 6.04323 14.1694 6.1385ZM10.4907 5.82515C10.4907 5.20539 10.3069 4.59956 9.96258 4.08426C9.61826 3.56895 9.12888 3.16732 8.5563 2.93016C7.98373 2.69299 7.35368 2.63093 6.74584 2.75184C6.138 2.87275 5.57966 3.17119 5.14143 3.60942C4.7032 4.04765 4.40476 4.60598 4.28385 5.21383C4.16295 5.82167 4.225 6.45171 4.46217 7.02429C4.69934 7.59686 5.10097 8.08625 5.61627 8.43057C6.13157 8.77488 6.73741 8.95866 7.35716 8.95866C8.18822 8.95866 8.98524 8.62852 9.57289 8.04087C10.1605 7.45323 10.4907 6.6562 10.4907 5.82515Z"
-                                  fill="#B1B1B1"
-                                />
-                              </svg>
-                            </Button>
-                          </div>
-                        </div>
+                       
+
+
                       )} */}
-                    </Col>
-                    <Col lg="5" md="6" className="my-2">
-                      <div className="py-2">
-                        <label
-                          htmlFor=""
-                          className="form-label fw-sbold text-muted ps-2 m-0"
-                        >
-                          Phone Number
-                        </label>
-                        <Controller
-                          control={control}
-                          name="phoneNumber"
-                          render={({ field }) => {
-                            return (
-                              <PhoneInput
-                                {...field}
-                                country={"in"}
-                                countryCodeEditable={false}
-                                disableDropdown={true}
-                                onChange={(value, { dialCode }) => {
-                                  field.onChange(value);
-                                }}
-                              />
-                            );
-                          }}
-                        />{" "}
-                        {errors.countryCode ? (
-                          <p className="text-danger m-0">
-                            {errors?.countryCode?.message}
-                          </p>
-                        ) : (
-                          errors?.contactNumber && (
-                            <p className="text-danger m-0">
-                              {errors?.contactNumber?.message}
-                            </p>
-                          )
-                        )}
-                      </div>
 
                       <div className="py-2">
                         <label
                           htmlFor=""
                           className="form-label fw-sbold text-muted ps-2 m-0"
                         >
-                          Status
+                          Password
                         </label>
-                        <div
-                          className="  d-flex align-items-center border px-2 pt-1  rounded w-auto"
-                          style={{
-                            width: "fitContent",
-                          }}
-                        >
-                          <Toggle
-                            isChecked={watch("status")}
-                            onChange={(e) =>
-                              setValue("status", e.target.checked)
-                            }
+                        <div className="iconWithText position-relative">
+                          <input
+                            type={!showPassWord && "password"}
+                            placeholder="*******************"
+                            className="form-control pe-4"
+                            {...register("password")}
                           />
-                          <p className="mb-0 pb-1">
-                            {watch("status") ? "Active" : "Inactive"}
-                          </p>
+                          {errors?.password && (
+                            <p className="text-danger m-0">
+                              {errors?.password?.message}
+                            </p>
+                          )}
+                          <Button
+                            variant="transparent"
+                            style={{ right: 8, top: 22 }}
+                            onClick={() => setShowPassword((p) => !p)}
+                            className="border-0 p-0 position-absolute icn "
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="15"
+                              height="11"
+                              viewBox="0 0 15 11"
+                              fill="none"
+                            >
+                              <path
+                                d="M9.23727 5.82515C9.23727 6.197 9.127 6.5605 8.92041 6.86968C8.71382 7.17886 8.42019 7.41984 8.07664 7.56214C7.7331 7.70444 7.35507 7.74167 6.99037 7.66913C6.62566 7.59658 6.29066 7.41752 6.02772 7.15458C5.76478 6.89164 5.58572 6.55664 5.51318 6.19194C5.44063 5.82723 5.47786 5.4492 5.62016 5.10566C5.76247 4.76211 6.00344 4.46848 6.31263 4.26189C6.62181 4.0553 6.98531 3.94504 7.35716 3.94504C7.85579 3.94504 8.33401 4.14312 8.68659 4.49571C9.03918 4.8483 9.23727 5.32651 9.23727 5.82515ZM14.1694 6.1385C14.0566 6.32651 11.437 10.8388 7.35716 10.8388C3.27732 10.8388 0.657706 6.32651 0.5449 6.1385C0.489895 6.04323 0.460938 5.93515 0.460938 5.82515C0.460937 5.71514 0.489895 5.60706 0.5449 5.51179C0.657706 5.32378 3.27732 0.811523 7.35716 0.811523C11.437 0.811523 14.0566 5.32378 14.1694 5.51179C14.2244 5.60706 14.2534 5.71514 14.2534 5.82515C14.2534 5.93515 14.2244 6.04323 14.1694 6.1385ZM10.4907 5.82515C10.4907 5.20539 10.3069 4.59956 9.96258 4.08426C9.61826 3.56895 9.12888 3.16732 8.5563 2.93016C7.98373 2.69299 7.35368 2.63093 6.74584 2.75184C6.138 2.87275 5.57966 3.17119 5.14143 3.60942C4.7032 4.04765 4.40476 4.60598 4.28385 5.21383C4.16295 5.82167 4.225 6.45171 4.46217 7.02429C4.69934 7.59686 5.10097 8.08625 5.61627 8.43057C6.13157 8.77488 6.73741 8.95866 7.35716 8.95866C8.18822 8.95866 8.98524 8.62852 9.57289 8.04087C10.1605 7.45323 10.4907 6.6562 10.4907 5.82515Z"
+                                fill="#B1B1B1"
+                              />
+                            </svg>
+                          </Button>
                         </div>
                       </div>
                     </Col>

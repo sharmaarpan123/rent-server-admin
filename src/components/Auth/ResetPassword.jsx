@@ -97,7 +97,7 @@ const ResetPassword = ({}) => {
       >
         {" "}
         <p
-          className="themeClr p-2 mb-0 text-center w-100"
+          className=" p-2 mb-0 text-center w-100"
           style={{ wordWrap: "normal" }}
         >
           {" "}
@@ -113,7 +113,7 @@ const ResetPassword = ({}) => {
         <div className="w-100 inner">
           <div className="top py-2">
             <div className="d-flex align-items-center gap-10">
-              <h4 className="m-0 fw-sbold themeClr">Reset Password</h4>
+              <h4 className="m-0 fw-sbold ">Reset Password</h4>
             </div>
           </div>
           <Form
@@ -124,7 +124,7 @@ const ResetPassword = ({}) => {
               <Col lg="12" className="my-2">
                 <label
                   htmlFor=""
-                  className="form-label m-0 pb-1 themeClr fw-sbold"
+                  className="form-label m-0 pb-1  fw-sbold"
                 >
                   New Password
                 </label>
@@ -154,7 +154,7 @@ const ResetPassword = ({}) => {
               <Col lg="12" className="my-2">
                 <label
                   htmlFor=""
-                  className="form-label m-0 pb-1 themeClr fw-sbold"
+                  className="form-label m-0 pb-1  fw-sbold"
                 >
                   Confirm Password
                 </label>
@@ -193,7 +193,7 @@ const ResetPassword = ({}) => {
                   </Button>
                   <Link
                     to="/login"
-                    className="mt-2 d-inline-flex align-items-center themeClr justify-content-center  py-2 font-sbold  broder-light btn "
+                    className="mt-2 d-inline-flex align-items-center  justify-content-center  py-2 font-sbold  broder-light btn "
                   >
                     Back to login
                   </Link>

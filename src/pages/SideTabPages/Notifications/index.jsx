@@ -1,23 +1,53 @@
-import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
 // img
-import { useSelector } from "react-redux";
-import CustomPagination from "../../../components/Common/CustomPagination";
-import dataHandler from "../../../hooks/dataHandler";
-import { GET_ALL_NOTIFICATIONS } from "../../../services/ApiCalls";
-import TableLayout from "../../../components/TableLayout";
 import moment from "moment";
+import TableLayout from "../../../components/TableLayout";
 
 const Notification = () => {
-  const { setBody, body, data, loader, paginationHandler, total } = dataHandler(
-    {
-      extraBody: {
-        limit: 20,
+  const {
+    setBody,
+    body = { page: 1, limit: 10 },
+    data = [
+      {
+        createdAt: moment().subtract(11, "d"),
+        title: "New user registered",
+        body: "new registration",
       },
-      api: GET_ALL_NOTIFICATIONS,
-    }
-  );
+      {
+        createdAt: moment().subtract(22, "d"),
+        title: "New user shops registered , waiting for the your approval!",
+        body: "new registration",
+      },
+
+      {
+        createdAt: moment().subtract(22, "d"),
+        title: "New user registered",
+        body: "new registration",
+      },
+
+      {
+        createdAt: moment().subtract(25, "d"),
+        title: "New user registered",
+        body: "new registration",
+      },
+
+      {
+        createdAt: moment().subtract(27, "d"),
+        title: "User have raised query",
+        body: "new query",
+      },
+
+      {
+        createdAt: moment().subtract(29, "d"),
+        title: "User have raised query",
+        body: "new query",
+      },
+    ],
+    loader,
+    paginationHandler,
+    total,
+  } = {};
 
   const column = [
     {
@@ -50,12 +80,12 @@ const Notification = () => {
           <Row>
             <Col lg="12" className="my-2">
               <TableLayout column={column} data={data} loader={loader} />
-              <CustomPagination
+              {/* <CustomPagination
                 body={body}
                 pageChangeHandler={paginationHandler}
                 setBody={setBody}
                 total={total}
-              />
+              /> */}
             </Col>
           </Row>
         </Container>

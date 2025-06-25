@@ -1,28 +1,22 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Button,
   Container,
-  Dropdown,
-  Form,
   Nav,
-  NavDropdown,
-  Navbar,
+  Navbar
 } from "react-bootstrap";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 // css
 import styles from "./Header.module.scss";
 
 // img
-import logo from "../../Assets/images/logo.jpeg";
-import user from "../../Assets/images/authBg.jpeg";
-import ConfirmationPop from "../Modals/ConfirmationPop";
-import Axios from "../../services/Axios";
 import { useSelector } from "react-redux";
+import logo from "../../Assets/images/logo.jpeg";
+import Axios from "../../services/Axios";
+import { catchAsync } from "../../utilities/utilities";
 import Notification from "../icons/svg/Notification";
-import { LOGOUT_ADMIN } from "../../store/Login/actionTypes";
-import { LOG_OUT } from "../../services/ApiCalls";
-import { catchAsync, checkResponse } from "../../utilities/utilities";
+import ConfirmationPop from "../Modals/ConfirmationPop";
 
 const Header = ({ sidebar, setSidebar, title }) => {
   const navigate = useNavigate();
@@ -41,23 +35,11 @@ const Header = ({ sidebar, setSidebar, title }) => {
   };
 
   const logoutHandler = catchAsync(async () => {
-    try {
-      const res = await LOG_OUT({
-        fcmToken: localStorage.getItem("fireBaseToken") || "",
-      });
-      checkResponse({ res, showSuccess: true });
-      Axios.LogoutUser({
-        response: {
-          status: 401,
-        },
-      });
-    } catch (error) {
-      Axios.LogoutUser({
-        response: {
-          status: 401,
-        },
-      });
-    }
+    Axios.LogoutUser({
+      response: {
+        status: 401,
+      },
+    });
   });
 
   return (
@@ -117,12 +99,12 @@ const Header = ({ sidebar, setSidebar, title }) => {
               id="navbarScroll"
             >
               <Nav className=" my-2 my-lg-0 align-items-center justify-content-between">
-                {/* <Link
+                <Link
                   className={`${styles.profileLink} px-3 d-flex align-items-center gap-10`}
                   to="/notifications"
                 >
                   <Notification />
-                </Link> */}
+                </Link>
 
                 <Link
                   className={`${styles.profileLink} px-3 d-flex align-items-center gap-10`}
@@ -149,17 +131,17 @@ const Header = ({ sidebar, setSidebar, title }) => {
                     width="35"
                     height="35"
                     viewBox="0 0 47 48"
-                    fill="none"
+                    fill="red"
                   >
                     <path
                       fill-rule="evenodd"
                       clip-rule="evenodd"
                       d="M18.9894 0.362555C20.0155 0.0547534 21.0993 -0.00892026 22.1543 0.176616C23.2094 0.362153 24.2064 0.791761 25.0659 1.43115C25.9254 2.07054 26.6235 2.902 27.1045 3.85916C27.5856 4.81633 27.8362 5.87268 27.8363 6.94392V40.444C27.8362 41.5153 27.5856 42.5716 27.1045 43.5288C26.6235 44.486 25.9254 45.3174 25.0659 45.9568C24.2064 46.5962 23.2094 47.0258 22.1543 47.2113C21.0993 47.3969 20.0155 47.3332 18.9894 47.0254L5.24482 42.902C3.82936 42.4774 2.58847 41.6078 1.70624 40.4223C0.823999 39.2368 0.34741 37.7984 0.347168 36.3207V11.0673C0.34741 9.58951 0.823999 8.15118 1.70624 6.96565C2.58847 5.78011 3.82936 4.91054 5.24482 4.48593L18.9894 0.362555ZM30.1271 5.36787C30.1271 4.76032 30.3684 4.17766 30.798 3.74806C31.2276 3.31846 31.8103 3.07711 32.4179 3.07711H39.2901C41.1128 3.07711 42.8608 3.80115 44.1496 5.08996C45.4384 6.37876 46.1624 8.12675 46.1624 9.9494V12.2402C46.1624 12.8477 45.9211 13.4304 45.4915 13.86C45.0619 14.2896 44.4792 14.5309 43.8717 14.5309C43.2641 14.5309 42.6815 14.2896 42.2519 13.86C41.8223 13.4304 41.5809 12.8477 41.5809 12.2402V9.9494C41.5809 9.34185 41.3396 8.75919 40.91 8.32959C40.4804 7.89998 39.8977 7.65864 39.2901 7.65864H32.4179C31.8103 7.65864 31.2276 7.41729 30.798 6.98769C30.3684 6.55809 30.1271 5.97542 30.1271 5.36787ZM43.8717 32.857C44.4792 32.857 45.0619 33.0984 45.4915 33.528C45.9211 33.9576 46.1624 34.5403 46.1624 35.1478V37.4386C46.1624 39.2612 45.4384 41.0092 44.1496 42.298C42.8608 43.5868 41.1128 44.3109 39.2901 44.3109H32.4179C31.8103 44.3109 31.2276 44.0695 30.798 43.6399C30.3684 43.2103 30.1271 42.6276 30.1271 42.0201C30.1271 41.4125 30.3684 40.8299 30.798 40.4003C31.2276 39.9707 31.8103 39.7293 32.4179 39.7293H39.2901C39.8977 39.7293 40.4804 39.488 40.91 39.0584C41.3396 38.6288 41.5809 38.0461 41.5809 37.4386V35.1478C41.5809 34.5403 41.8223 33.9576 42.2519 33.528C42.6815 33.0984 43.2641 32.857 43.8717 32.857ZM16.3825 21.4032C15.775 21.4032 15.1923 21.6446 14.7627 22.0742C14.3331 22.5038 14.0917 23.0864 14.0917 23.694C14.0917 24.3015 14.3331 24.8842 14.7627 25.3138C15.1923 25.7434 15.775 25.9847 16.3825 25.9847H16.3848C16.9924 25.9847 17.575 25.7434 18.0046 25.3138C18.4342 24.8842 18.6756 24.3015 18.6756 23.694C18.6756 23.0864 18.4342 22.5038 18.0046 22.0742C17.575 21.6446 16.9924 21.4032 16.3848 21.4032H16.3825Z"
-                      fill="#ff00bf"
+                      fill="red"
                     />
                     <path
                       d="M43.8713 23.6938L39.2898 28.2754M32.4175 23.6938H43.8713H32.4175ZM43.8713 23.6938L39.2898 19.1123L43.8713 23.6938Z"
-                      stroke="#ff00bf"
+                      stroke="red"
                       stroke-width="3.33333"
                       stroke-linecap="round"
                       stroke-linejoin="round"
