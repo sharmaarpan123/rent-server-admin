@@ -175,7 +175,12 @@ const FeatureCard = ({ data }) => {
       <Row>
         {cards?.map((item, key) => (
           <Col key={key} lg="3" md="4" sm="6" className="my-2">
-            <div className="cardCstm border rounded p-2 px-3 py-lg-2 d-flex align-items-center gap-10 h-100">
+            <div
+              style={{
+                borderRadius: 18,
+              }}
+              className="cardCstm border  p-2 px-3 py-lg-2 d-flex align-items-center gap-10 h-100"
+            >
               <div className="icnWrp flex-shrink-0 me-3">{item.icn}</div>
               <div className="content">
                 <h6 className="m-0 fw-bold text-muted py-1">{item.label}</h6>

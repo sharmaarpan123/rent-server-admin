@@ -12,7 +12,7 @@ export default {
   //    USER
   USER_LIST: "/api/v1/admin/user-list",
   USER_ADD: "/api/v1/admin/manual-user",
-  GET_USER_BY_ID: "/api/v1/admin/view/",
+  GET_USER_BY_ID: "/api/v1/admin/view",
   BLOCK_USER: "/api/v1/admin/block/",
 
   // queries

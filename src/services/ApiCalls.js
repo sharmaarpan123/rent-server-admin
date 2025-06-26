@@ -19,8 +19,7 @@ export const DASHBOARD = (data) => Axios.get(API_URL.DASHBOARD, data);
 export const QUERIES_LIST = (data) => Axios.post(API_URL.QUERIES_LIST, data);
 //USERS
 export const USER_LIST = (data) => Axios.post(API_URL.USER_LIST, data);
-export const GET_USER_BY_ID = (data) =>
-  Axios.get(API_URL.GET_USER_BY_ID + data);
+export const GET_USER_BY_ID = (data) => Axios.post(API_URL.GET_USER_BY_ID, data);
 export const USER_ADD = (data) => Axios.post(API_URL.USER_ADD, data);
 
 export const BLOCK_UNBLOCK_USER = (id) => Axios.put(API_URL.BLOCK_USER + id);

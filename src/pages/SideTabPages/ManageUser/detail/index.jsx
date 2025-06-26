@@ -12,17 +12,14 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import { GET_USER_BY_ID } from "../../../../services/ApiCalls";
 import { noImagePlaceHolder } from "../../../../utilities/const";
-import {
-  catchAsync,
-  checkResponse
-} from "../../../../utilities/utilities";
+import { catchAsync, checkResponse } from "../../../../utilities/utilities";
 
 const UserDetail = () => {
   const [userDetails, setUserUserDetails] = useState();
   const [profileImage, setProfileImage] = useState();
   const { id } = useParams();
   const getData = catchAsync(async () => {
-    const res = await GET_USER_BY_ID(id);
+    const res = await GET_USER_BY_ID({ id });
     const success = checkResponse({ res, setData: setUserUserDetails });
     if (success) setProfileImage(res?.data?.data?.profileImage);
   });

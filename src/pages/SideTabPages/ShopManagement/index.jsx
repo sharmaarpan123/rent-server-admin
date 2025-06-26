@@ -13,6 +13,7 @@ import dataHandler from "../../../hooks/dataHandler";
 import {
   DEAL_CATEGORY_LIST,
   QUERIES_LIST,
+  SHOP_DELETE,
   SHOPS_LIST,
   UPDATE_STATUS_DEAL_CATEGORY,
 } from "../../../services/ApiCalls";
@@ -79,18 +80,35 @@ const ShopManagement = () => {
     {
       head: "Actions",
       component: (item) => {
-        return <TableActions editUrl={"/manage-shops/edit/" + item?._id} />;
+        return (
+          <TableActions
+            editUrl={"/manage-shops/edit/" + item?._id}
+            setDeleteModel={() => {
+              setDeleteModel({ show: true, dumpId: item?._id });
+            }}
+          />
+        );
       },
     },
   ];
 
   return (
     <>
+      <ConfirmationPop
+        type={"delete"}
+        confirmHandler={() => {
+          deleteHandler(() => SHOP_DELETE({ id: deleteModel.dumpId }));
+        }}
+        confirmation={deleteModel.show}
+        setConfirmation={(value) =>
+          setDeleteModel((p) => ({ show: value, dumpId: "" }))
+        }
+      />
       <section className="systemAcess py-3 position-relative">
         <Container>
           <Row>
             <Col lg="12" className="my-2">
-              <div className="tableFilter d-flex align-items-center justify-content-between flex-wrap gap-10 mb-3">
+              <div className="tableFilter d-flex a  lign-items-center justify-content-between flex-wrap gap-10 mb-3">
                 <div className="left">
                   <ul className="list-unstyled ps-0 mb-0 d-flex align-items-center gap-10 flex-wrap">
                     <Filter
