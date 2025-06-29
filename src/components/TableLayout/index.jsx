@@ -7,13 +7,12 @@ import {
   IoIosArrowDropdownCircle,
 } from "react-icons/io";
 
-
 // image
 
 const showUnderScoreIds =
   import.meta.env.VITE_APP_SHOW_UNDER_SCORE_ID_IN_TABLES === "true";
 
-const TableLayout = ({ column, data, loader }) => {
+const TableLayout = ({ column, data, loader, body, setBody }) => {
   const isUnderScoreColAlreadyAdded = column?.some((item) => {
     if (item.accessor === "_id") {
       return true;
@@ -43,7 +42,29 @@ const TableLayout = ({ column, data, loader }) => {
                   }
                   return (
                     <>
-                      <th className="text-muted fw-bold">{item.head} </th>
+                      <th
+                        className="text-muted fw-bold"
+                        onClick={() => {
+                          if (body && setBody && item?.sortKey  ) {
+                            setBody((p) => ({ ...p, sort: item?.sortKey , order : p.order === -1 ? 1 : -1 }));
+                          }
+                        }}
+                      >
+                        {item.head}{" "}
+                        {item?.sortKey && body && setBody ? (
+                          <>
+                            {body.sort === item.sortKey ? (
+                              <>
+                                {body.order === -1 ? (
+                                  <IoIosArrowDropupCircle />
+                                ) : (
+                                  <IoIosArrowDropdownCircle />
+                                )}
+                              </>
+                            ) : null}
+                          </>
+                        ) : null}
+                      </th>
                     </>
                   );
                 })}

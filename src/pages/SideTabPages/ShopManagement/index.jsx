@@ -61,6 +61,7 @@ const ShopManagement = () => {
     {
       head: "Name",
       accessor: "name",
+      sortKey: "name",
     },
 
     {
@@ -74,6 +75,15 @@ const ShopManagement = () => {
         >
           {item.status || "-"}
         </p>
+      ),
+    },
+
+    {
+      head: "Date || Time ",
+      accessor: "createdAt",
+      sortKey: "createdAt",
+      component: (item, key, arr) => (
+        <>{moment(item.createdAt).format("DD-MM-YYYY  hh:mm:ss A")}</>
       ),
     },
 
@@ -137,7 +147,13 @@ const ShopManagement = () => {
               </div>
             </Col>
             <Col lg="12" className="my-2">
-              <TableLayout column={column} data={data} loader={loader} />
+              <TableLayout
+                body={body}
+                setBody={setBody}
+                column={column}
+                data={data}
+                loader={loader}
+              />
               <CustomPagination
                 total={total}
                 pageChangeHandler={paginationHandler}

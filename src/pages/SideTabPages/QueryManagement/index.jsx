@@ -1,32 +1,24 @@
-import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import TableLayout from "../../../components/TableLayout";
 
 // img
 import moment from "moment";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import CustomPagination from "../../../components/Common/CustomPagination";
+import Filter from "../../../components/Common/Filter";
 import noImg from "../../../components/Common/noImg";
-import TableActions from "../../../components/Common/TableActions";
-import TableToggle from "../../../components/Common/TableToggle";
-import ConfirmationPop from "../../../components/Modals/ConfirmationPop";
 import dataHandler from "../../../hooks/dataHandler";
 import {
-  DEAL_CATEGORY_LIST,
-  QUERIES_LIST,
-  UPDATE_STATUS_DEAL_CATEGORY,
+  QUERIES_LIST
 } from "../../../services/ApiCalls";
 import {
   activeInactiveOptions,
-  activeInActiveStatusOptions,
-  ADMIN_ROLE_TYPE_ENUM,
+  ADMIN_ROLE_TYPE_ENUM
 } from "../../../utilities/const";
 import {
-  capitalizedFirstAlphaBet,
-  isSuperAdmin,
+  capitalizedFirstAlphaBet
 } from "../../../utilities/utilities";
-import CustomPagination from "../../../components/Common/CustomPagination";
-import Filter from "../../../components/Common/Filter";
-import { useSelector } from "react-redux";
 
 const QueryManagement = () => {
   const {
@@ -78,15 +70,18 @@ const QueryManagement = () => {
     {
       head: "Email",
       accessor: "email",
+       sortKey: "email",
     },
     {
       head: "Concern",
       accessor: "concern",
+       sortKey: "concern",
+
     },
     
     {
       head: "Date || Time ",
-      accessor: "createdAt",
+      accessor: "createdAt", sortKey: "createdAt",
       component: (item, key, arr) => (
         <>{moment(item.createdAt).format("DD-MM-YYYY  hh:mm:ss A")}</>
       ),
@@ -131,7 +126,7 @@ const QueryManagement = () => {
               </div>
             </Col>
             <Col lg="12" className="my-2">
-              <TableLayout column={column} data={data} loader={loader} />
+              <TableLayout body={body} setBody={setBody} column={column} data={data} loader={loader} />
               <CustomPagination
                 total={total}
                 pageChangeHandler={paginationHandler}

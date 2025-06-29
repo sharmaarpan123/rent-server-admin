@@ -114,6 +114,7 @@ const dataHandler = ({ api, extraBody, dependencies, dataToSet }) => {
     body.limit,
     body.paymentStatus,
     body.isSlotCompleted,
+    body.order
   ];
   if (dependencies && dependencies.length > 0) {
     dependencies.forEach((item) => {

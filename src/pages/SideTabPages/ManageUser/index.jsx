@@ -34,6 +34,7 @@ const ManageUser = () => {
   } = dataHandler({
     api: USER_LIST,
     dataToSet: (data) => data?.data?.userList,
+    extraBody: { sort: "createdAt", order: -1 },
   });
 
   const column = [
@@ -153,7 +154,7 @@ const ManageUser = () => {
               </div>
             </Col>
             <Col lg="12" className="my-2">
-              <TableLayout column={column} data={data} loader={loader} />
+              <TableLayout body={body} setBody={ setBody} column={column} data={data} loader={loader} />
               <CustomPagination
                 total={total}
                 pageChangeHandler={paginationHandler}
