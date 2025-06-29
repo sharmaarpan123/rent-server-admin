@@ -9,11 +9,21 @@ import { useNavigate } from "react-router-dom";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
+import AsyncSelect from "react-select/async";
 import { z } from "zod";
+import ReactSelectNoOptionMessage from "../../../../components/Common/ReactSelectNoOptionMessage";
 import Toggle from "../../../../components/Common/Toggle";
-import { SHOP_ADD, SHOP_EDIT, SHOP_VIEW } from "../../../../services/ApiCalls";
-import { catchAsync, checkResponse } from "../../../../utilities/utilities";
-
+import {
+  SHOP_ADD,
+  SHOP_EDIT,
+  SHOP_VIEW,
+  USER_LIST,
+} from "../../../../services/ApiCalls";
+import {
+  catchAsync,
+  checkResponse,
+  errorToast,
+} from "../../../../utilities/utilities";
 const schema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
   status: z.string().min(1, { message: "Name is required" }),
@@ -21,10 +31,12 @@ const schema = z.object({
 
 const AddEditShops = () => {
   const navigate = useNavigate();
-  const [image, setImage] = useState("");
+  // const [image, setImage] = useState("");
   const [detailsCategory, setDealCategoryList] = useState();
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
+  const [selectedUser, setSelectedUser] = useState([]);
+  const [defaultUsers, setDefaultUsers] = useState([]);
   const {
     register,
     handleSubmit,
@@ -43,13 +55,23 @@ const AddEditShops = () => {
     let res;
     setLoader(true);
 
+    if (data?.status === "rented" && !selectedUser?.value) {
+      return errorToast({ message: "Please select the user" });
+    }
+
+    console.log(data, selectedUser, "Selecteduser");
+
     if (id) {
       res = await SHOP_EDIT({
         ...data,
         id,
+        ...(data?.status === "rented" && { userId: selectedUser?.value }),
       });
     } else {
-      res = await SHOP_ADD(data);
+      res = await SHOP_ADD({
+        ...data,
+        ...(data?.status === "rented" && { userId: selectedUser?.value }),
+      });
     }
     checkResponse({
       res,
@@ -63,13 +85,55 @@ const AddEditShops = () => {
   const getData = catchAsync(async () => {
     const res = await SHOP_VIEW({ id });
     const success = checkResponse({ res, setData: setDealCategoryList });
-    if (success) setImage(res?.data?.data?.image);
+
+    if (success) {
+      const user = res?.data?.data?.userId;
+      if (user?._id) {
+        setSelectedUser((p) => ({ label: user?.userName, value: user?._id }));
+      }
+    }
   });
 
   useEffect(() => {
     if (id) getData();
   }, [id]);
 
+  const loadShopsOptions = async (inputValue, callback) => {
+    const response = await USER_LIST({
+      search: inputValue?.trim(),
+    });
+    if (checkResponse({ res: response })) {
+      const options = response?.data?.data?.userList?.map((item) => ({
+        value: item._id,
+        label: item?.userName,
+      }));
+      callback(options);
+      if (!!!options.length) {
+        setSelectedUser([]);
+      }
+    } else {
+      callback([]);
+      setSelectedUser([]);
+    }
+  };
+
+  const getDefaultUsers = async () => {
+    const response = await USER_LIST({
+      limit: 50,
+      page: 1,
+    });
+    if (checkResponse({ res: response })) {
+      const options = response?.data?.data?.userList?.map((item) => ({
+        value: item._id,
+        label: item?.userName,
+      }));
+      setDefaultUsers((p) => options);
+    }
+  };
+
+  useEffect(() => {
+    getDefaultUsers();
+  }, [id]);
   return (
     <>
       <section className="subadmin position-relative py-3">
@@ -157,6 +221,39 @@ const AddEditShops = () => {
                         )}
                       </div>
                     </Col>
+
+                    {watch("status") === "rented" && (
+                      <Col lg="8" md="6" className="my-2">
+                        <div className="py-2">
+                          <label
+                            htmlFor=""
+                            className="form-label fw-sbold text-muted ps-0 m-0"
+                          >
+                            Select User
+                          </label>
+                          <AsyncSelect
+                            components={{
+                              DropdownIndicator: () => null,
+                              IndicatorSeparator: () => null,
+                              NoOptionsMessage: (props) => (
+                                <ReactSelectNoOptionMessage
+                                  message="Search Users"
+                                  {...props}
+                                />
+                              ),
+                            }}
+                            defaultOptions={defaultUsers}
+                            loadOptions={loadShopsOptions}
+                            value={selectedUser}
+                            isClearable
+                            placeholder="Search User"
+                            onChange={(value) => {
+                              setSelectedUser(value);
+                            }}
+                          />
+                        </div>
+                      </Col>
+                    )}
 
                     <Col lg="12" className="my-2">
                       <div className="d-flex align-items-center justify-content-center gap-10">

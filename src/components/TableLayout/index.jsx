@@ -2,6 +2,11 @@ import React from "react";
 // css
 import styles from "./Table.module.scss";
 import Loading from "../Common/Loading";
+import {
+  IoIosArrowDropupCircle,
+  IoIosArrowDropdownCircle,
+} from "react-icons/io";
+
 
 // image
 
@@ -14,9 +19,6 @@ const TableLayout = ({ column, data, loader }) => {
       return true;
     }
   }); // this is to avoid duplicated _id id on development mode , if_id is already showing in the table
-
-
-  console.log(column , "Column" , data)
 
   return (
     <>
@@ -41,7 +43,7 @@ const TableLayout = ({ column, data, loader }) => {
                   }
                   return (
                     <>
-                      <th className="text-muted fw-bold">{item.head}</th>
+                      <th className="text-muted fw-bold">{item.head} </th>
                     </>
                   );
                 })}

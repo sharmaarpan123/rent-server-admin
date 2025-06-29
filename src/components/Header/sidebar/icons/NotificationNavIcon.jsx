@@ -1,11 +1,11 @@
 import React from "react";
 
-const Notification = ({ size, color }) => {
+const NotificationNavIcon = ({ size, color }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
-      fill={color || "#000000"}
+      fill={"white"}
       height={size || "15"}
       width={size || "15"}
       version="1.1"
@@ -25,4 +25,4 @@ const Notification = ({ size, color }) => {
   );
 };
 
-export default Notification;
+export default NotificationNavIcon;

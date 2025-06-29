@@ -1,29 +1,29 @@
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 
 // img
 // import i1 from "@/Assets/images/authBg.jpeg";
-import i1 from "../../../../Assets/images/authBg.jpeg";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // img
 // import i1 from "@/Assets/images/authBg.jpeg";
 
-import { DEAL_CATEGORY_BY_ID } from "../../../../services/ApiCalls";
+import moment from "moment";
+import { SHOP_VIEW } from "../../../../services/ApiCalls";
 import {
   catchAsync,
   checkResponse,
   removeUnderScoreAndCapitalizeFirstLetter,
 } from "../../../../utilities/utilities";
-import moment from "moment";
+import ShopVisitorListing from "./ShopVistorListing";
 
-const DealCategoryDetails = () => {
+const ShopDetails = () => {
   const [userDetails, setUserUserDetails] = useState();
   const [profileImage, setProfileImage] = useState();
   const { id } = useParams();
   const getData = catchAsync(async () => {
-    const res = await DEAL_CATEGORY_BY_ID(id);
+    const res = await SHOP_VIEW({ id });
     const success = checkResponse({ res, setData: setUserUserDetails });
     if (success) setProfileImage(res?.data?.data?.image);
   });
@@ -59,7 +59,7 @@ const DealCategoryDetails = () => {
                   </svg>
                 </Link>
                 <h4 className="mb-0 py-3 fw-bold themePink text-capitalize">
-                  Plat form Information
+                  Shop Information
                 </h4>
               </div>
             </Col>
@@ -69,19 +69,6 @@ const DealCategoryDetails = () => {
                 style={{ background: "#EEEEEE" }}
               >
                 <Row className="justify-content-between">
-                  <Col lg="12" className="my-2">
-                    <div
-                      className="imgWrp text-center mx-auto"
-                      style={{ maxWidth: "max-content" }}
-                    >
-                      <img
-                        src={profileImage || i1}
-                        style={{ height: 140, width: 140 }}
-                        alt=""
-                        className="img-fluid rounded-circle object-fit-contain"
-                      />
-                    </div>
-                  </Col>
                   <Col md={6} className="my-2">
                     <ul className="list-unstyled ps-0 mb-0 notLastBorder pe-lg-3">
                       <li className="py-3 d-flex align-items-center gap-10">
@@ -97,6 +84,16 @@ const DealCategoryDetails = () => {
                   <Col md={6} className="my-2">
                     <ul className="list-unstyled mb-0 notLastBorder ps-lg-3">
                       <li className="py-3 d-flex align-items-center gap-10">
+                        <p className="m-0 themePink fw-sbold w-25">Status</p>
+                        <h6 className="m-0 text-muted fw-bold w-50">
+                          {removeUnderScoreAndCapitalizeFirstLetter(
+                            userDetails?.status === "rented"
+                              ? "Rented"
+                              : "Non Rented"
+                          )}
+                        </h6>
+                      </li>
+                      <li className="py-3 d-flex align-items-center gap-10">
                         <p className="m-0 themePink fw-sbold w-25">
                           Created at:
                         </p>
@@ -106,18 +103,23 @@ const DealCategoryDetails = () => {
                           )}
                         </h6>
                       </li>
-                      <li className="py-3 d-flex align-items-center gap-10">
-                        <p className="m-0 themePink fw-sbold w-25">Status</p>
-                        <h6 className="m-0 text-muted fw-bold w-50">
-                          {removeUnderScoreAndCapitalizeFirstLetter(
-                            userDetails?.isActive ? "Active" : "Inactive"
-                          )}
-                        </h6>
-                      </li>
                     </ul>
                   </Col>
                 </Row>
               </div>
+            </Col>
+            <Col lg="12" className="my-2">
+              <div
+                className="formWrpper px-2 rounded"
+                style={{ background: "#EEEEEE" }}
+              >
+                <h4 className="mb-0 py-3 fw-bold themePink text-capitalize">
+                  Shop Visitor users
+                </h4>
+              </div>
+            </Col>
+            <Col>
+              <ShopVisitorListing shopId={id} />
             </Col>
           </Row>
         </Container>
@@ -126,4 +128,4 @@ const DealCategoryDetails = () => {
   );
 };
 
-export default DealCategoryDetails;
+export default ShopDetails;

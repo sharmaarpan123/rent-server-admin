@@ -12,7 +12,7 @@ export const CHANGE_PASSWORD = (data) =>
 
 // DASHBOARD
 
-export const DASHBOARD = (data) => Axios.get(API_URL.DASHBOARD, data);
+export const DASHBOARD = (data) => Axios.post(API_URL.DASHBOARD, data);
 
 // query Management
 
@@ -31,6 +31,7 @@ export const SHOP_ADD = (data) => Axios.post(API_URL.SHOP_ADD, data);
 export const SHOP_VIEW = (data) => Axios.post(API_URL.SHOP_VIEW, data);
 export const SHOP_DELETE = (data) => Axios.post(API_URL.SHOP_DELETE, data);
 export const SHOP_EDIT = (data) => Axios.post(API_URL.SHOP_EDIT, data);
+export const SHOP_VISITOR_LISTING = (data) => Axios.post(API_URL.SHOP_VISITOR_LISTING, data);
 
 ////////////////////////////////// this api are already imported at some where so no time remove that other wise it will give errors
 

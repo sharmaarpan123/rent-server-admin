@@ -25,9 +25,9 @@ const Dashboard = () => {
   const getDashBoardData = catchAsync(async () => {
     setLoader(true);
 
-    // const res = await DASHBOARD();
+    const res = await DASHBOARD();
 
-    // checkResponse({ res, setData, setLoader });
+    checkResponse({ res, setData, setLoader });
   }, setLoader);
 
   useEffect(() => {
@@ -42,10 +42,10 @@ const Dashboard = () => {
           <Col xs={12}>
             <FeatureCard
               data={{
-                totalUsers: 1002,
-                totalShops: 20000,
-                unRegisteredUser: 30000,
-                queries: 20000000,
+                totalUsers: data?.totalUsers || 1002,
+                totalShops: data?.totalShops || 20000,
+                unRegisteredUser: data?.unRegisteredUser || 30000,
+                queries: data?.queries || 20000000,
               }}
             />
           </Col>

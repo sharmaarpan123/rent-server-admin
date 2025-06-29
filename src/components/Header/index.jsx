@@ -103,7 +103,7 @@ const Header = ({ sidebar, setSidebar, title }) => {
                   className={`${styles.profileLink} px-3 d-flex align-items-center gap-10`}
                   to="/notifications"
                 >
-                  <Notification />
+                  <Notification size={30} />
                 </Link>
 
                 <Link

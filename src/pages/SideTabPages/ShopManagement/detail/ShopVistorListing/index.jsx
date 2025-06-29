@@ -1,27 +1,21 @@
-import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import TableLayout from "../../../components/TableLayout";
+import TableLayout from "../../../../../components/TableLayout";
 
 // img
 import moment from "moment";
-import CustomPagination from "../../../components/Common/CustomPagination";
-import Filter from "../../../components/Common/Filter";
-import TableActions from "../../../components/Common/TableActions";
-import Toggle from "../../../components/Common/Toggle";
-import dataHandler from "../../../hooks/dataHandler";
+import { Link } from "react-router-dom";
+import CustomPagination from "../../../../../components/Common/CustomPagination";
+import Filter from "../../../../../components/Common/Filter";
+import TableActions from "../../../../../components/Common/TableActions";
+import dataHandler from "../../../../../hooks/dataHandler";
 import {
   BLOCK_UNBLOCK_USER,
-  USER_LIST,
-  USER_STATUS_CHANGE,
-} from "../../../services/ApiCalls";
-import {
-  activeInactiveOptions,
-  ADMIN_ROLE_TYPE_ENUM,
-} from "../../../utilities/const";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+  SHOP_VISITOR_LISTING,
+} from "../../../../../services/ApiCalls";
+import { activeInactiveOptions } from "../../../../../utilities/const";
+import { useEffect } from "react";
 
-const ManageUser = () => {
+const ShopVisitorListing = ({ shopId }) => {
   const {
     setBody,
     statusChangeHandler,
@@ -32,10 +26,20 @@ const ManageUser = () => {
     searchHandler,
     total,
   } = dataHandler({
-    api: USER_LIST,
-    dataToSet: (data) => data?.data?.userList,
+    api: SHOP_VISITOR_LISTING,
+    dataToSet: (data) => data?.data?.list,
+    dependencies: ["shopId"],
+    extraBody: { shopId },
   });
 
+  useEffect(() => {
+    setBody((p) => ({
+      ...p,
+      shopId,
+    }));
+  }, [shopId]);
+
+  console.log(total, "total");
   const column = [
     {
       head: "#",
@@ -47,43 +51,18 @@ const ManageUser = () => {
     {
       head: "User Name",
       accessor: "name",
-      sortKey: "userName",
       component: (item, key, arr) => (
         <p className="m-0 themePink fw-sbold text-wrap">{item.userName}</p>
       ),
     },
-    { head: "Email", accessor: "email", sortKey: "email" },
-
+    { head: "Email", accessor: "email" },
     {
       head: "Date || Time ",
       accessor: "createdAt",
-      sortKey: "createdAt",
       component: (item, key, arr) => (
         <>{moment(item.createdAt).format("DD-MM-YYYY  hh:mm:ss A")}</>
       ),
     },
-
-    // {
-    //   head: "Status",
-    //   accessor: "status",
-    //   component: (item, key, arr) => (
-    //     <Toggle
-    //       isChecked={item.isActive}
-    //       onChange={() =>
-    //         statusChangeHandler(
-    //           () =>
-    //             USER_STATUS_CHANGE({
-    //               userId: item._id,
-    //               status: !item.isActive,
-    //             }),
-    //           key,
-    //           "isActive",
-    //           !item.isActive
-    //         )
-    //       }
-    //     />
-    //   ),
-    // },
 
     {
       head: "Status",
@@ -106,15 +85,15 @@ const ManageUser = () => {
       accessor: "Action",
       component: (item, ind) => (
         <TableActions
-          blockUnBlockHandler={() =>
-            statusChangeHandler(
-              () => BLOCK_UNBLOCK_USER(item?._id),
-              ind,
-              "isBlock",
-              !item?.isBlock
-            )
-          }
-          isBlocked={item?.isBlock}
+          // blockUnBlockHandler={() =>
+          //   statusChangeHandler(
+          //     () => BLOCK_UNBLOCK_USEr(item?._id),
+          //     ind,
+          //     "isBlock",
+          //     !item?.isBlock
+          //   )
+          // }
+          // isBlocked={item?.isBlock}
           viewLink={"/manage-user/detail/" + item?._id}
         />
       ),
@@ -137,19 +116,6 @@ const ManageUser = () => {
                     statusFilterOptionArr={activeInactiveOptions}
                   />
                 </div>
-                <div className="right">
-                  <ul className="list-unstyled ps-0 mb-0 d-flex align-items-center gap-10 flex-wrap">
-                    <li className="">
-                      <Link
-                        to={"/manage-user/add"}
-                        className="d-flex btn btn-primary align-items-center justify-content-center fw-sbold commonBtn"
-                        style={{ height: 40, minWidth: 100, fontSize: 12 }}
-                      >
-                        Add New User
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
               </div>
             </Col>
             <Col lg="12" className="my-2">
@@ -168,4 +134,4 @@ const ManageUser = () => {
   );
 };
 
-export default ManageUser;
+export default ShopVisitorListing;

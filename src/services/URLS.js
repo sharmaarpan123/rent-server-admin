@@ -26,6 +26,7 @@ export default {
   SHOP_VIEW: "/api/v1/admin/shop-view",
   SHOP_DELETE: "/api/v1/admin/shop-delete",
   SHOP_EDIT: "/api/v1/admin/shop-edit",
+  SHOP_VISITOR_LISTING: "/api/v1/admin/shop-visitors-list",
 
   // not used yet
 

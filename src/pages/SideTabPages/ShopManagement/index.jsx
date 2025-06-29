@@ -86,6 +86,7 @@ const ShopManagement = () => {
             setDeleteModel={() => {
               setDeleteModel({ show: true, dumpId: item?._id });
             }}
+            viewLink={"/manage-shops/view/" + item?._id}
           />
         );
       },

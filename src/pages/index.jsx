@@ -65,6 +65,7 @@ import AddSubAdmin from "./SideTabPages/SystemAccess/add";
 import QueryManagement from "./SideTabPages/QueryManagement";
 import ShopManagement from "./SideTabPages/ShopManagement";
 import AddEditShops from "./SideTabPages/ShopManagement/add";
+import ShopDetails from "./SideTabPages/ShopManagement/detail";
 export const publicRoutes = [
   { path: "privacy-policy", component: <PrivacyPolicy /> },
 ];
@@ -106,6 +107,12 @@ export const privateRoutes = [
     component: <AddEditShops />,
     title: "Add Shops",
   },
+  {
+    path: "/manage-shops/view/:id",
+    component: <ShopDetails />,
+    title: "View Shops",
+  },
+
   {
     path: "/manage-shops/edit/:id",
     component: <AddEditShops />,

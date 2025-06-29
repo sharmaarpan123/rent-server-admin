@@ -95,40 +95,38 @@ const TableActions = ({
               </svg>
             </span>
           ) : (
-         <span className={`${styles.icn} ${styles.stroke} icn me-1`}>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="25"
-    height="25"
-    viewBox="0 0 24 24"
-    fill="green"
-  >
-    <path
-      d="M8 11V7C8 5.34315 9.34315 4 11 4C12.6569 4 14 5.34315 14 7"
-      stroke="white"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-    />
-    <rect
-      x="5"
-      y="11"
-      width="14"
-      height="10"
-      rx="2"
-      stroke="white"
-      strokeWidth="1.5"
-    />
-    <path
-      d="M10 16L11.5 17.5L14 15"
-      stroke="white"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-</span>
-
-
+            <span  onClick={blockUnBlockHandler} className={`${styles.icn} ${styles.stroke} icn me-1`}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                viewBox="0 0 24 24"
+                fill="green"
+              >
+                <path
+                  d="M8 11V7C8 5.34315 9.34315 4 11 4C12.6569 4 14 5.34315 14 7"
+                  stroke="white"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <rect
+                  x="5"
+                  y="11"
+                  width="14"
+                  height="10"
+                  rx="2"
+                  stroke="white"
+                  strokeWidth="1.5"
+                />
+                <path
+                  d="M10 16L11.5 17.5L14 15"
+                  stroke="white"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
           )}
         </>
       )}
