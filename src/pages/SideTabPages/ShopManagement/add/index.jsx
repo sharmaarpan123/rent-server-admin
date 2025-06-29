@@ -65,12 +65,12 @@ const AddEditShops = () => {
       res = await SHOP_EDIT({
         ...data,
         id,
-        ...(data?.status === "rented" && { userId: selectedUser?.value }),
+        ...(data?.status === "rented" && { user: selectedUser?.value }),
       });
     } else {
       res = await SHOP_ADD({
         ...data,
-        ...(data?.status === "rented" && { userId: selectedUser?.value }),
+        ...(data?.status === "rented" && { user: selectedUser?.value }),
       });
     }
     checkResponse({
@@ -87,7 +87,7 @@ const AddEditShops = () => {
     const success = checkResponse({ res, setData: setDealCategoryList });
 
     if (success) {
-      const user = res?.data?.data?.userId;
+      const user = res?.data?.data?.rentUser;
       if (user?._id) {
         setSelectedUser((p) => ({ label: user?.userName, value: user?._id }));
       }
