@@ -57,16 +57,16 @@ const QueryManagement = () => {
         </p>
       ),
     },
-    {
-      head: "User Image",
-      accessor: "image",
-      component: (item, key, arr) => (
-        <img
-          src={item?.user?.profileImage || noImg}
-          style={{ width: 100, height: 80, objectFit: "contain" }}
-        />
-      ),
-    },
+    // {
+    //   head: "User Image",
+    //   accessor: "image",
+    //   component: (item, key, arr) => (
+    //     <img
+    //       src={item?.user?.profileImage || noImg}
+    //       style={{ width: 100, height: 80, objectFit: "contain" }}
+    //     />
+    //   ),
+    // },
     {
       head: "Email",
       accessor: "email",

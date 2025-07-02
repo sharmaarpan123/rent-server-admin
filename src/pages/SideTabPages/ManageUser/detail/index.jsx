@@ -64,7 +64,7 @@ const UserDetail = () => {
                 style={{ background: "#EEEEEE" }}
               >
                 <Row className="justify-content-between">
-                  <Col lg="12" className="my-2">
+                  {/* <Col lg="12" className="my-2">
                     <div
                       className="imgWrp text-center mx-auto"
                       style={{ maxWidth: "max-content" }}
@@ -76,7 +76,7 @@ const UserDetail = () => {
                         className="img-fluid rounded-circle object-fit-cover"
                       />
                     </div>
-                  </Col>
+                  </Col> */}
                   <Col md={6} className="my-2">
                     <ul className="list-unstyled ps-0 mb-0 notLastBorder pe-lg-3">
                       <li className="py-3 d-flex align-items-center gap-10">

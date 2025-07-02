@@ -133,7 +133,7 @@ const ShopManagement = () => {
                 </div>
                 <div className="right">
                   <ul className="list-unstyled ps-0 mb-0 d-flex align-items-center gap-10 flex-wrap">
-                    <li className="">
+                    {/* <li className="">
                       <Link
                         to={"/manage-shops/add"}
                         className="d-flex btn btn-primary align-items-center justify-content-center fw-sbold commonBtn"
@@ -141,7 +141,7 @@ const ShopManagement = () => {
                       >
                         Add New shop
                       </Link>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </div>
