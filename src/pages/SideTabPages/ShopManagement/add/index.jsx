@@ -24,14 +24,16 @@ import {
   checkResponse,
   errorToast,
 } from "../../../../utilities/utilities";
-const schema = z.object({
-  name: z.string().min(1, { message: "Name is required" }),
-  status: z.string().min(1, { message: "Name is required" }),
-});
+import { useTranslation } from "react-i18next";
+const schema = (t) =>
+  z.object({
+    name: z.string().min(1, { message: t("validation.nameRequired") }),
+    status: z.string().min(1, { message: t("validation.statusRequired") }),
+  });
 
 const AddEditShops = () => {
   const navigate = useNavigate();
-  // const [image, setImage] = useState("");
+  const { t } = useTranslation();
   const [detailsCategory, setDealCategoryList] = useState();
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
@@ -48,7 +50,7 @@ const AddEditShops = () => {
       name: detailsCategory?.name || "",
       status: detailsCategory?.status || "non-rented",
     },
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schema(t)),
   });
 
   const submitHandler = catchAsync(async (data) => {
@@ -175,7 +177,7 @@ const AddEditShops = () => {
                           htmlFor=""
                           className="form-label fw-sbold text-muted ps-0 m-0"
                         >
-                          Name
+                          {t("name")}
                         </label>
                         <input
                           type="text"
@@ -196,7 +198,7 @@ const AddEditShops = () => {
                           htmlFor=""
                           className="form-label fw-sbold text-muted ps-0 m-0"
                         >
-                          Is Rented ?
+                          {t("isRented")} ?
                         </label>
                         <Controller
                           control={control}
@@ -229,7 +231,7 @@ const AddEditShops = () => {
                             htmlFor=""
                             className="form-label fw-sbold text-muted ps-0 m-0"
                           >
-                            Select User
+                            {t("select")} {t("user")}
                           </label>
                           <AsyncSelect
                             components={{

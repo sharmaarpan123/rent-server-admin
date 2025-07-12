@@ -15,13 +15,14 @@ import Loading from "../../../components/Common/Loading";
 import styles from "./Dashboard.module.scss";
 import AreaChart from "../../../components/Graph/AreaChart";
 import PieChart from "../../../components/Graph/PieChart";
+import { useTranslation } from "react-i18next";
 
 // img
 
 const Dashboard = () => {
   const [data, setData] = useState({});
   const [loader, setLoader] = useState(false);
-
+  const { t } = useTranslation();
   const getDashBoardData = catchAsync(async () => {
     setLoader(true);
 
@@ -56,7 +57,7 @@ const Dashboard = () => {
           <Col lg={12}>
             <div className="dashboard-card h-100">
               <div className="card-header">
-                <h5 className="mb-0">Users signup's over time</h5>
+                <h5 className="mb-0">{t("userSignupsOverTime")}</h5>
               </div>
               <div className="card-body">
                 <AreaChart data={data} />

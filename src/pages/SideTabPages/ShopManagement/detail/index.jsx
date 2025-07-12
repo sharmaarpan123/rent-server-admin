@@ -17,10 +17,12 @@ import {
   removeUnderScoreAndCapitalizeFirstLetter,
 } from "../../../../utilities/utilities";
 import ShopVisitorListing from "./ShopVistorListing";
+import { useTranslation } from "react-i18next";
 
 const ShopDetails = () => {
   const [userDetails, setUserUserDetails] = useState();
   const [profileImage, setProfileImage] = useState();
+  const { t } = useTranslation();
   const { id } = useParams();
   const getData = catchAsync(async () => {
     const res = await SHOP_VIEW({ id });
@@ -59,7 +61,7 @@ const ShopDetails = () => {
                   </svg>
                 </Link>
                 <h4 className="mb-0 py-3 fw-bold themePink text-capitalize">
-                  Shop Information
+                  {t("shopInformation")}
                 </h4>
               </div>
             </Col>
@@ -73,15 +75,15 @@ const ShopDetails = () => {
                     <ul className="list-unstyled ps-0 mb-0 notLastBorder pe-lg-3">
                       <li className="py-3 d-flex align-items-center gap-10">
                         <p className="m-0 themePink fw-sbold w-25">
-                          Full Name:
+                          {t("fullName")}:
                         </p>
                         <h6 className="m-0 text-muted fw-bold w-50">
                           {userDetails?.name}
                         </h6>
                       </li>
-                       <li className="py-3 d-flex align-items-center gap-10">
+                      <li className="py-3 d-flex align-items-center gap-10">
                         <p className="m-0 themePink fw-sbold w-25">
-                          Assigned User Name:
+                          {t("assignedUserName")}:
                         </p>
                         <h6 className="m-0 text-muted fw-bold w-50">
                           {userDetails?.rentUser?.userName || "--"}
@@ -92,7 +94,9 @@ const ShopDetails = () => {
                   <Col md={6} className="my-2">
                     <ul className="list-unstyled mb-0 notLastBorder ps-lg-3">
                       <li className="py-3 d-flex align-items-center gap-10">
-                        <p className="m-0 themePink fw-sbold w-25">Status</p>
+                        <p className="m-0 themePink fw-sbold w-25">
+                          {t("status")}
+                        </p>
                         <h6 className="m-0 text-muted fw-bold w-50">
                           {removeUnderScoreAndCapitalizeFirstLetter(
                             userDetails?.status === "rented"
@@ -103,7 +107,7 @@ const ShopDetails = () => {
                       </li>
                       <li className="py-3 d-flex align-items-center gap-10">
                         <p className="m-0 themePink fw-sbold w-25">
-                          Created at:
+                          {t("createdAt")}:
                         </p>
                         <h6 className="m-0 text-muted fw-bold w-50">
                           {moment(userDetails?.date_created_utc).format(
@@ -122,7 +126,7 @@ const ShopDetails = () => {
                 style={{ background: "#EEEEEE" }}
               >
                 <h4 className="mb-0 py-3 fw-bold themePink text-capitalize">
-                  Shop Visitor users
+                  {t("shopVisitorUsers")}
                 </h4>
               </div>
             </Col>

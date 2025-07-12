@@ -6,6 +6,7 @@ import {
   paymentStatusOptions,
   slotCompletedStatusOptions,
 } from "../../utilities/const";
+import { useTranslation } from "react-i18next";
 
 const Filter = ({
   statusFilterOptionArr,
@@ -17,6 +18,7 @@ const Filter = ({
   showSearch = true,
   showStatusFilter = true,
 }) => {
+  const { t } = useTranslation();
   const clearFilter = () => {
     setBody((p) => ({
       ...p,
@@ -38,47 +40,13 @@ const Filter = ({
             className="form-label m-0 fw-sbold text-muted"
             style={{ whiteSpace: "nowrap" }}
           >
-            Status
+            {t("status")}
           </label>
           <StatusFilter
             body={body}
             setBody={setBody}
             statusKey={"status"}
             statusFilterOptionArr={statusFilterOptionArr}
-          />
-        </li>
-      )}
-      {ShowPaymentStatus && (
-        <li className="d-flex align-items-center flex-column gap-10">
-          <label
-            htmlFor=""
-            className="form-label m-0 fw-sbold text-muted"
-            style={{ whiteSpace: "nowrap" }}
-          >
-            Payment Status
-          </label>
-          <StatusFilter
-            body={body}
-            setBody={setBody}
-            statusKey={"paymentStatus"}
-            statusFilterOptionArr={paymentStatusOptions}
-          />
-        </li>
-      )}
-      {ShowSlotStatus && (
-        <li className="d-flex align-items-center flex-column gap-10">
-          <label
-            htmlFor=""
-            className="form-label m-0 fw-sbold text-muted"
-            style={{ whiteSpace: "nowrap" }}
-          >
-            Slot Completed Status
-          </label>
-          <StatusFilter
-            body={body}
-            setBody={setBody}
-            statusKey={"isSlotCompleted"}
-            statusFilterOptionArr={slotCompletedStatusOptions}
           />
         </li>
       )}
@@ -94,7 +62,7 @@ const Filter = ({
       )}
       <li>
         <Button className="commonBtn" type="button" onClick={clearFilter}>
-          Clear
+          {t("clear")}
         </Button>
       </li>
     </ul>

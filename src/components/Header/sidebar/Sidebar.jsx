@@ -5,6 +5,7 @@ import styles from "./Sidebar.module.scss";
 import { Accordion, Button } from "react-bootstrap";
 import logo from "../../../Assets/images/logo.jpeg";
 import { commonItems } from "./Routes";
+import { useTranslation } from "react-i18next";
 
 const Sidebar = ({ sidebar, setSidebar }) => {
   const location = useLocation();
@@ -12,7 +13,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
   const handleSidebar = () => {
     setSidebar((p) => !p);
   };
-
+  const { t } = useTranslation();
   const navItems = commonItems;
 
   return (
@@ -64,7 +65,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
                     >
                       <Accordion.Header>
                         <Icon styles={styles} />
-                        {name}
+                        {t(name)}
                       </Accordion.Header>
                       {subItems?.map(({ path, name, icon: Icon }) => {
                         return (
@@ -76,7 +77,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
                                 pageActive.includes(path) && styles.active
                               } d-flex align-items-center gap-10 text-white`}
                             >
-                              {name}
+                              {t(name)}
                             </NavLink>
                           </Accordion.Body>
                         );
@@ -98,7 +99,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
                     } d-flex align-items-center gap-10 text-white`}
                   >
                     <Icon styles={styles} />
-                    {name}
+                    {t(name)}
                   </NavLink>
                 </li>
               );

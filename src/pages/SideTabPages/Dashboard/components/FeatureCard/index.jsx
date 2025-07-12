@@ -1,6 +1,8 @@
 import { Col, Row } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 const FeatureCard = ({ data }) => {
+  const { t } = useTranslation();
   const cards = [
     {
       icn: (
@@ -61,7 +63,7 @@ const FeatureCard = ({ data }) => {
           </defs>
         </svg>
       ),
-      label: "Total Customer",
+      label: t("totalCustomer"),
       value: data?.totalUsers,
     },
 
@@ -84,7 +86,7 @@ const FeatureCard = ({ data }) => {
           />
         </svg>
       ),
-      label: "Total Shops",
+      label: t("totalShops"),
       value: data?.totalShops,
     },
     {
@@ -146,7 +148,7 @@ const FeatureCard = ({ data }) => {
           </defs>
         </svg>
       ),
-      label: "Total  Number of Visitor",
+      label: t("totalVisitors"),
       value: data?.unRegisteredUser,
     },
 
@@ -165,7 +167,7 @@ const FeatureCard = ({ data }) => {
           />
         </svg>
       ),
-      label: "Total Queries",
+      label: t("totalQueries"),
       value: data?.queries,
     },
   ];

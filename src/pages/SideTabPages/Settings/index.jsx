@@ -6,9 +6,11 @@ import i1 from "../../../Assets/images/authBg.jpeg";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const Settings = () => {
   const { admin } = useSelector((s) => s.login);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -17,7 +19,7 @@ const Settings = () => {
           <Row className="justify-content-center">
             <Col lg="12">
               <h4 className="mb-0 py-3 fw-bold themePink text-capitalize">
-                Profile
+                {t("profile")}
               </h4>
             </Col>
             <Col lg="7" md="9" sm="11" className="my-2">
@@ -43,14 +45,19 @@ const Settings = () => {
                         </div>
                       </li>
                       <li className="py-3 d-flex align-items-center gap-10">
-                        <p className="m-0 themePink fw-sbold w-25">Name:</p>
+                        <p className="m-0 themePink fw-sbold w-25">
+                          {t("name")}:
+                        </p>
                         <h6 className="m-0 text-muted fw-bold w-75">
                           {admin?.name || "Super Admin"}
                         </h6>
                       </li>
 
                       <li className="py-3 d-flex align-items-center gap-10">
-                        <p className="m-0 themePink fw-sbold w-25">Email:</p>
+                        <p className="m-0 themePink fw-sbold w-25">
+                          {" "}
+                          {t("email")}:
+                        </p>
                         <h6 className="m-0 text-muted fw-bold w-75">
                           {admin?.email}
                         </h6>
@@ -58,7 +65,7 @@ const Settings = () => {
                       {admin?.userName && (
                         <li className="py-3 d-flex align-items-center gap-10">
                           <p className="m-0 themePink fw-sbold w-25">
-                            User Name:
+                            {t("userName")}:
                           </p>
                           <h6 className="m-0 text-muted fw-bold w-75">
                             {admin?.userName}
@@ -71,7 +78,7 @@ const Settings = () => {
                         to="/settings/password"
                         className="d-flex btn btn-primary align-items-center justify-content-center commonBtn GreyBtn"
                       >
-                        Manage Password
+                        {t("managePassword")}
                       </Link>
                     </div>
                   </Col>

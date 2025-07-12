@@ -1,12 +1,15 @@
+import { t } from "i18next";
 import React from "react";
 import { Button } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 const SearchFilter = ({ body, setBody, searchHandler }) => {
+  const { t } = useTranslation();
   return (
     <div className="searchBox position-relative iconWithText">
       <form
         onSubmit={(e) => {
-          e.preventDefault(); 
+          e.preventDefault();
           searchHandler();
         }}
       >
@@ -31,7 +34,7 @@ const SearchFilter = ({ body, setBody, searchHandler }) => {
         </Button>
         <input
           type="text"
-          placeholder="Search"
+          placeholder={t("search")}
           value={body.search}
           onChange={(e) =>
             setBody((p) => ({

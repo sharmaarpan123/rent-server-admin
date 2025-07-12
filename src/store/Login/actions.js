@@ -28,3 +28,8 @@ export const profileImageChange = (payload) => ({
   type: CONST.CHANGE_PROFILE_IMAGE,
   payload,
 });
+
+export const updateLang = (payload) => ({
+  type: CONST.CHANGE_LANG,
+  payload,
+});

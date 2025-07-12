@@ -1,5 +1,5 @@
 import URLS from "../services/URLS";
-import noImage from "../Assets/images/no-img.png"
+import noImage from "../Assets/images/no-img.png";
 
 export const paginationLimitArr = [5, 10, 20, 50, 100, 200, 500, 1000, 2000];
 
@@ -141,3 +141,9 @@ export const DealByBrandIdApiAccessingAsEnum = {
   medDealsAsAgency: "medDealsAsAgency",
   dealAsMed: "dealAsMed",
 };
+
+export const langOptions = [
+  { label: "English", value: "en" },
+  { label: "Spanish", value: "es" },
+  { label: "French", value: "fr" },
+];

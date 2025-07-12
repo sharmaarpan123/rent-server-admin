@@ -4,8 +4,10 @@ import styles from "./common.module.scss";
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
 import { paginationLimitArr } from "../../utilities/const";
+import { useTranslation } from "react-i18next";
 
 const CustomPagination = ({ total, pageChangeHandler, body, setBody }) => {
+  const { t } = useTranslation();
   if (!total) {
     return <></>;
   }
@@ -16,7 +18,7 @@ const CustomPagination = ({ total, pageChangeHandler, body, setBody }) => {
       >
         <div className="left d-flex align-items-center gap-10">
           <p className="m-0" style={{ whiteSpace: "nowrap" }}>
-            Show result:{" "}
+            {t("showResult")}:{" "}
           </p>
           <Form.Select
             className="fw-bold text-dark"

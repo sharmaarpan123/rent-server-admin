@@ -3,8 +3,10 @@ import { Col, Container, Row } from "react-bootstrap";
 // img
 import moment from "moment";
 import TableLayout from "../../../components/TableLayout";
+import { useTranslation } from "react-i18next";
 
 const Notification = () => {
+  const { t } = useTranslation();
   const {
     setBody,
     body = { page: 1, limit: 10 },
@@ -58,17 +60,17 @@ const Notification = () => {
       },
     },
     {
-      head: "Time",
+      head: t("time"),
       component: (item) => {
         return <>{moment(item?.createdAt).format("DD-MM-YYYY  hh:mm:ss A")}</>;
       },
     },
     {
-      head: "Title",
+      head: t("title"),
       accessor: "body",
     },
     {
-      head: "Message",
+      head: t("message"),
       accessor: "title",
     },
   ];

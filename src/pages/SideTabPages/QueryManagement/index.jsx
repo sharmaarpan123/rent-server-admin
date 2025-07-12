@@ -9,18 +9,16 @@ import CustomPagination from "../../../components/Common/CustomPagination";
 import Filter from "../../../components/Common/Filter";
 import noImg from "../../../components/Common/noImg";
 import dataHandler from "../../../hooks/dataHandler";
-import {
-  QUERIES_LIST
-} from "../../../services/ApiCalls";
+import { QUERIES_LIST } from "../../../services/ApiCalls";
 import {
   activeInactiveOptions,
-  ADMIN_ROLE_TYPE_ENUM
+  ADMIN_ROLE_TYPE_ENUM,
 } from "../../../utilities/const";
-import {
-  capitalizedFirstAlphaBet
-} from "../../../utilities/utilities";
+import { capitalizedFirstAlphaBet } from "../../../utilities/utilities";
+import { useTranslation } from "react-i18next";
 
 const QueryManagement = () => {
+  const { t } = useTranslation();
   const {
     setBody,
     body,
@@ -38,8 +36,6 @@ const QueryManagement = () => {
     dataToSet: (data) => data?.data?.data,
   });
 
-  const { admin } = useSelector((s) => s.login);
-
   const column = [
     {
       head: "#",
@@ -49,7 +45,7 @@ const QueryManagement = () => {
       },
     },
     {
-      head: "User Name",
+      head: t("userName"),
       accessor: "name",
       component: (item, key, arr) => (
         <p className="m-0 themePink fw-sbold">
@@ -57,31 +53,22 @@ const QueryManagement = () => {
         </p>
       ),
     },
-    // {
-    //   head: "User Image",
-    //   accessor: "image",
-    //   component: (item, key, arr) => (
-    //     <img
-    //       src={item?.user?.profileImage || noImg}
-    //       style={{ width: 100, height: 80, objectFit: "contain" }}
-    //     />
-    //   ),
-    // },
-    {
-      head: "Email",
-      accessor: "email",
-       sortKey: "email",
-    },
-    {
-      head: "Concern",
-      accessor: "concern",
-       sortKey: "concern",
 
-    },
-    
     {
-      head: "Date || Time ",
-      accessor: "createdAt", sortKey: "createdAt",
+      head: t("email"),
+      accessor: "email",
+      sortKey: "email",
+    },
+    {
+      head: t("concern"),
+      accessor: "concern",
+      sortKey: "concern",
+    },
+
+    {
+      head: t("dateTime"),
+      accessor: "createdAt",
+      sortKey: "createdAt",
       component: (item, key, arr) => (
         <>{moment(item.createdAt).format("DD-MM-YYYY  hh:mm:ss A")}</>
       ),
@@ -106,27 +93,16 @@ const QueryManagement = () => {
                     />
                   </ul>
                 </div>
-                <div className="right">
-                  <ul className="list-unstyled ps-0 mb-0 d-flex align-items-center gap-10 flex-wrap">
-                    {admin?.roles?.includes(
-                      ADMIN_ROLE_TYPE_ENUM.SUPERADMIN
-                    ) && (
-                      <li className="">
-                        <Link
-                          to={"/category/add"}
-                          className="d-flex btn btn-primary align-items-center justify-content-center fw-sbold commonBtn"
-                          style={{ height: 40, minWidth: 100, fontSize: 12 }}
-                        >
-                          Add New Category
-                        </Link>
-                      </li>
-                    )}
-                  </ul>
-                </div>
               </div>
             </Col>
             <Col lg="12" className="my-2">
-              <TableLayout body={body} setBody={setBody} column={column} data={data} loader={loader} />
+              <TableLayout
+                body={body}
+                setBody={setBody}
+                column={column}
+                data={data}
+                loader={loader}
+              />
               <CustomPagination
                 total={total}
                 pageChangeHandler={paginationHandler}

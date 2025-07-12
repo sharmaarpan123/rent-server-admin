@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import * as CONST from "./actionTypes";
 import { startTransition } from "react";
 
-  const intialState = {
+const intialState = {
   isLogin: false,
   loading: false,
   meQueryLoading: false,
@@ -11,6 +11,7 @@ import { startTransition } from "react";
   token: (localStorage && localStorage.getItem("token")) || null,
   _id: (localStorage && localStorage.getItem("_id")) || null,
   profileImage: (localStorage && localStorage.getItem("profileImage")) || null,
+  currentLang: (localStorage && localStorage.getItem("lang")) || null,
 };
 
 const LoginReducer = (state = intialState, { type, payload }) => {
@@ -54,6 +55,13 @@ const LoginReducer = (state = intialState, { type, payload }) => {
       return {
         ...state,
         profileImage: payload,
+      };
+
+    case CONST.CHANGE_LANG:
+      localStorage.setItem("lang", payload);
+      return {
+        ...state,
+        currentLang: payload,
       };
 
     default:

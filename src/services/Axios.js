@@ -17,6 +17,7 @@ class Axios {
       baseURL: `${API_URL}`,
       headers: {
         Authorization: "Bearer" + " " + localStorage.getItem("token") || "",
+        lang: localStorage.getItem("lang") || "en",
       },
     };
   };
@@ -35,7 +36,10 @@ class Axios {
     return axios
       .get(url, { ...this.defaultOptions(), ...options })
       .then((res) => {
-        if (res.data.message && res.data.message.includes("You are not Authorized")) {
+        if (
+          res.data.message &&
+          res.data.message.includes("You are not Authorized")
+        ) {
           let err = {
             response: {
               status: 401,
@@ -60,7 +64,10 @@ class Axios {
     return axios
       .post(url, data, { ...this.defaultOptions(), ...options })
       .then((res) => {
-        if (res.data.message && res.data.message.includes("You are not Authorized")) {
+        if (
+          res.data.message &&
+          res.data.message.includes("You are not Authorized")
+        ) {
           let err = {
             response: {
               status: 401,
@@ -85,7 +92,10 @@ class Axios {
     return axios
       .put(url, data, { ...this.defaultOptions(), ...options })
       .then((res) => {
-        if (res.data.message && res.data.message.includes("You are not Authorized")) {
+        if (
+          res.data.message &&
+          res.data.message.includes("You are not Authorized")
+        ) {
           let err = {
             response: {
               status: 401,
@@ -110,7 +120,10 @@ class Axios {
     return axios
       .delete(url, { ...this.defaultOptions(), ...options })
       .then((res) => {
-        if (res.data.message && res.data.message.includes("You are not Authorized")) {
+        if (
+          res.data.message &&
+          res.data.message.includes("You are not Authorized")
+        ) {
           let err = {
             response: {
               status: 401,

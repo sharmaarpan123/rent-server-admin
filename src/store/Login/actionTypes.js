@@ -6,3 +6,7 @@ export const LOGIN_ADMIN_FAIL = "LOGIN_ADMIN_FAIL";
 
 export const LOGOUT_ADMIN = "LOGOUT_ADMIN";
 export const CHANGE_PROFILE_IMAGE = "CHANGE_PROFILE_IMAGE";
+
+// lang
+
+export const CHANGE_LANG = "CHANGE_LANG";

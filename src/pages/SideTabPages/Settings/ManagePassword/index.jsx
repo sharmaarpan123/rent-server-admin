@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,52 +10,47 @@ import {
 } from "../../../../services/ApiCalls";
 import { catchAsync, checkResponse } from "../../../../utilities/utilities";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
-const schema = z
-  .object({
-    oldPassword: z
-      .string()
-      .min(1, {
-        message: "Password is required",
-      })
-      .regex(/[a-z]/, { message: "Password must include a lowercase letter" })
-      .regex(/[A-Z]/, { message: "Password must include an uppercase letter" })
-      .regex(/[0-9]/, { message: "Password must include a number" })
-      .regex(/[^A-Za-z0-9]/, {
-        message: "Password must include a special character or symbol",
-      }),
-    newPassword: z
-      .string()
-      .min(1, {
-        message: "Password is required",
-      })
-      .regex(/[a-z]/, { message: "Password must include a lowercase letter" })
-      .regex(/[A-Z]/, { message: "Password must include an uppercase letter" })
-      .regex(/[0-9]/, { message: "Password must include a number" })
-      .regex(/[^A-Za-z0-9]/, {
-        message: "Password must include a special character or symbol",
-      }),
-    confirmPassword: z
-      .string()
-      .min(1, {
-        message: "Password is required",
-      })
-      .regex(/[a-z]/, { message: "Password must include a lowercase letter" })
-      .regex(/[A-Z]/, { message: "Password must include an uppercase letter" })
-      .regex(/[0-9]/, { message: "Password must include a number" })
-      .regex(/[^A-Za-z0-9]/, {
-        message: "Password must include a special character or symbol",
-      }),
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    path: ["confirmPassword"],
-    message: "New Password and Confirm Password must match.",
-  });
-
+const schema = (t) =>
+  z
+    .object({
+      oldPassword: z
+        .string()
+        .min(1, { message: t("validation.passwordRequired") })
+        .regex(/[a-z]/, { message: t("validation.passwordLowercase") })
+        .regex(/[A-Z]/, { message: t("validation.passwordUppercase") })
+        .regex(/[0-9]/, { message: t("validation.passwordNumber") })
+        .regex(/[^A-Za-z0-9]/, {
+          message: t("validation.passwordSymbol"),
+        }),
+      newPassword: z
+        .string()
+        .min(1, { message: t("validation.passwordRequired") })
+        .regex(/[a-z]/, { message: t("validation.passwordLowercase") })
+        .regex(/[A-Z]/, { message: t("validation.passwordUppercase") })
+        .regex(/[0-9]/, { message: t("validation.passwordNumber") })
+        .regex(/[^A-Za-z0-9]/, {
+          message: t("validation.passwordSymbol"),
+        }),
+      confirmPassword: z
+        .string()
+        .min(1, { message: t("validation.passwordRequired") })
+        .regex(/[a-z]/, { message: t("validation.passwordLowercase") })
+        .regex(/[A-Z]/, { message: t("validation.passwordUppercase") })
+        .regex(/[0-9]/, { message: t("validation.passwordNumber") })
+        .regex(/[^A-Za-z0-9]/, {
+          message: t("validation.passwordSymbol"),
+        }),
+    })
+    .refine((data) => data.newPassword === data.confirmPassword, {
+      path: ["confirmPassword"],
+      message: t("validation.passwordMismatch"),
+    });
 const ManagePassword = () => {
   const navigate = useNavigate();
 
-  const { admin } = useSelector((s) => s.login);
+  const { t, i18n } = useTranslation();
 
   const [showPassWord, setShowPassword] = useState({
     oldPassword: false,
@@ -86,13 +81,19 @@ const ManagePassword = () => {
 
   const {
     register,
+    trigger,
     handleSubmit,
-    formState: { errors },
+    formState: { isDirty, errors },
   } = useForm({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schema(t)),
     reValidateMode: "onChange",
     mode: "onChange",
   });
+
+  useEffect(() => {
+    isDirty && trigger();
+  }, [i18n.language]);
+
   return (
     <>
       <section className="managePassword py-3 position-relative">
@@ -120,7 +121,7 @@ const ManagePassword = () => {
                   </svg>
                 </Link>
                 <h4 className="mb-0 py-3 fw-bold themePink text-capitalize">
-                  Change Password
+                  {t("changePassword")}
                 </h4>
               </div>
             </Col>
@@ -136,7 +137,7 @@ const ManagePassword = () => {
                         htmlFor=""
                         className="form-label fw-sbold text-muted ps-2 m-0"
                       >
-                        Enter Current Password
+                        {t("enterCurrentPassword")}
                       </label>
                       <div className="position-relative iconWithText">
                         <Button
@@ -176,7 +177,7 @@ const ManagePassword = () => {
                         htmlFor=""
                         className="form-label fw-sbold text-muted ps-2 m-0"
                       >
-                        Enter New Password
+                        {t("enterNewPassword")}
                       </label>
                       <div className="position-relative iconWithText">
                         <Button
@@ -216,7 +217,7 @@ const ManagePassword = () => {
                         htmlFor=""
                         className="form-label fw-sbold text-muted ps-2 m-0"
                       >
-                        Confirm New Password
+                        {t("confirmNewPassword")}
                       </label>
                       <div className="position-relative iconWithText">
                         <Button
@@ -260,13 +261,13 @@ const ManagePassword = () => {
                           className="d-flex align-items-center justify-content-center commonBtn GreyBtn"
                           onClick={() => navigate(-1)}
                         >
-                          Cancel
+                          {t("cancel")}
                         </Button>
                         <Button
                           type="submit"
                           className="d-flex align-items-center justify-content-center commonBtn "
                         >
-                          Submit
+                          {t("submit")}
                         </Button>
                       </div>
                     </Col>

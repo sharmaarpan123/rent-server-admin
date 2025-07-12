@@ -83,48 +83,49 @@ export const privateRoutes = [
     component: <PrivacyPolicy />,
     title: "Privacy Policy",
   },
-  { path: "/dashboard", component: <Dashboard />, title: "Dashboard" },
-  { path: "/manage-query", component: <QueryManagement />, title: "Queries" },
-  { path: "/manage-user", component: <ManageUser />, title: "Manage Users" },
-  { path: "/manage-user/add", component: <AddEditUser />, title: "Add User" },
+  { path: "/dashboard", component: <Dashboard />, title: "dashboard" },
+  { path: "/manage-query", component: <QueryManagement />, title: "queries" },
+  { path: "/manage-user", component: <ManageUser />, title: "users" },
+  { path: "/manage-user/add", component: <AddEditUser />, title: "adUser" },
   {
     path: "/manage-user/edit/:id",
     component: <AddEditUser />,
-    title: "Edit User",
+    title: "editUser",
   },
   {
     path: "/manage-user/detail/:id",
     component: <UserDetail />,
-    title: "User Details",
+    title: "userDetails",
   },
   {
     path: "/manage-shops",
     component: <ShopManagement />,
-    title: "Manage Shops",
+    title: "manageShops",
   },
   {
     path: "/manage-shops/add",
     component: <AddEditShops />,
-    title: "Add Shops",
+    title: "addShops",
   },
   {
     path: "/manage-shops/view/:id",
     component: <ShopDetails />,
-    title: "View Shops",
+    title: "viewShops",
   },
-
   {
     path: "/manage-shops/edit/:id",
     component: <AddEditShops />,
-    title: "Edit Shops",
+    title: "editShops",
   },
   {
     path: "/settings/edit-profile",
     component: <EditProfile />,
+    title: "editProfile",
   },
   {
     path: "/settings/password",
     component: <ManagePassword />,
+    title: "managePassword",
   },
 
   // not used yet this /////////////////******************* */

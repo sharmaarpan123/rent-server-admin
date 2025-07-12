@@ -1,10 +1,5 @@
 import { useState } from "react";
-import {
-  Button,
-  Container,
-  Nav,
-  Navbar
-} from "react-bootstrap";
+import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 // css
@@ -17,12 +12,15 @@ import Axios from "../../services/Axios";
 import { catchAsync } from "../../utilities/utilities";
 import Notification from "../icons/svg/Notification";
 import ConfirmationPop from "../Modals/ConfirmationPop";
+import LangDropDown from "./component/LangDropDown";
+import { useTranslation } from "react-i18next";
 
 const Header = ({ sidebar, setSidebar, title }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [confirmation, setConfirmation] = useState();
   const pageName = location.pathname;
+  const { t } = useTranslation();
   let lastSlashIndex = pageName.lastIndexOf("/");
   let heading;
   if (lastSlashIndex !== -1) {
@@ -81,7 +79,7 @@ const Header = ({ sidebar, setSidebar, title }) => {
             <Navbar.Brand className={`${styles.logo} d-lg-none`} href="#">
               {/* <img src={logo} alt="" className={`img-fluid`} /> */}
               <h4 className="mb-0 py-3 fw-bold themePink text-capitalize ">
-                {title}
+                {t(title)}
               </h4>
             </Navbar.Brand>
 
@@ -91,7 +89,7 @@ const Header = ({ sidebar, setSidebar, title }) => {
             />
 
             <h6 className="mb-0 py-3 fw-bold themePink text-capitalize d-none d-lg-block">
-              {title}
+              {t(title)}
             </h6>
 
             <Navbar.Collapse
@@ -99,6 +97,7 @@ const Header = ({ sidebar, setSidebar, title }) => {
               id="navbarScroll"
             >
               <Nav className=" my-2 my-lg-0 align-items-center justify-content-between">
+                <LangDropDown />
                 <Link
                   className={`${styles.profileLink} px-3 d-flex align-items-center gap-10`}
                   to="/notifications"

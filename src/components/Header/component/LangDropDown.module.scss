@@ -1,0 +1,10 @@
+.LangDropDown {
+  button {
+    background-color: transparent !important;
+    color: black !important;
+    &:hover {
+      color: black;
+      background-color: transparent;
+    }
+  }
+}

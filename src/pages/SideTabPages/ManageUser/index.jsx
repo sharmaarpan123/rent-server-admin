@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useTransition } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import TableLayout from "../../../components/TableLayout";
 
@@ -20,6 +20,7 @@ import {
 } from "../../../utilities/const";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ManageUser = () => {
   const {
@@ -37,6 +38,8 @@ const ManageUser = () => {
     extraBody: { sort: "createdAt", order: -1 },
   });
 
+  const { t } = useTranslation();
+
   const column = [
     {
       head: "#",
@@ -46,17 +49,17 @@ const ManageUser = () => {
       },
     },
     {
-      head: "User Name",
+      head: t("userName"),
       accessor: "name",
       sortKey: "userName",
       component: (item, key, arr) => (
         <p className="m-0 themePink fw-sbold text-wrap">{item.userName}</p>
       ),
     },
-    { head: "Email", accessor: "email", sortKey: "email" },
+    { head: t("email"), accessor: "email", sortKey: "email" },
 
     {
-      head: "Date || Time ",
+      head: t("dateTime"),
       accessor: "createdAt",
       sortKey: "createdAt",
       component: (item, key, arr) => (
@@ -64,30 +67,8 @@ const ManageUser = () => {
       ),
     },
 
-    // {
-    //   head: "Status",
-    //   accessor: "status",
-    //   component: (item, key, arr) => (
-    //     <Toggle
-    //       isChecked={item.isActive}
-    //       onChange={() =>
-    //         statusChangeHandler(
-    //           () =>
-    //             USER_STATUS_CHANGE({
-    //               userId: item._id,
-    //               status: !item.isActive,
-    //             }),
-    //           key,
-    //           "isActive",
-    //           !item.isActive
-    //         )
-    //       }
-    //     />
-    //   ),
-    // },
-
     {
-      head: "Status",
+      head: t("status"),
       component: (item) => (
         <p
           className={`mb-0 ${
@@ -104,7 +85,7 @@ const ManageUser = () => {
 
     {
       head: "Action",
-      accessor: "Action",
+      accessor: t("action"),
       component: (item, ind) => (
         <TableActions
           blockUnBlockHandler={() =>
@@ -146,7 +127,7 @@ const ManageUser = () => {
                         className="d-flex btn btn-primary align-items-center justify-content-center fw-sbold commonBtn"
                         style={{ height: 40, minWidth: 100, fontSize: 12 }}
                       >
-                        Add New User
+                        {t("adNewUser")}
                       </Link>
                     </li>
                   </ul>
@@ -154,7 +135,13 @@ const ManageUser = () => {
               </div>
             </Col>
             <Col lg="12" className="my-2">
-              <TableLayout body={body} setBody={ setBody} column={column} data={data} loader={loader} />
+              <TableLayout
+                body={body}
+                setBody={setBody}
+                column={column}
+                data={data}
+                loader={loader}
+              />
               <CustomPagination
                 total={total}
                 pageChangeHandler={paginationHandler}

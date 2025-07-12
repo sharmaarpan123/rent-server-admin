@@ -8,27 +8,27 @@ import ShopsNavIcon from "./icons/ShopsNavIcon.jsx";
 export const commonItems = [
   {
     path: "/dashboard",
-    name: "Dashboard",
+    name: "dashboard",
     icon: DashboardIcon,
   },
   {
     path: "/manage-user",
-    name: "Users",
+    name: "users",
     icon: ManageUserIcons,
   },
   {
     path: "/manage-shops",
-    name: "Shops",
+    name: "shops",
     icon: ShopsNavIcon,
   },
   {
     path: "/manage-query",
-    name: "Queries",
+    name: "queries",
     icon: QueryNavIcons,
   },
   {
     path: "/notifications",
-    name: "Notifications",
-    icon:  NotificationNavIcon,
+    name: "notifications",
+    icon: NotificationNavIcon,
   },
 ];

@@ -1,28 +1,10 @@
-import React, { useState } from "react";
-import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 
 // css
+import { useTranslation } from "react-i18next";
 import styles from "./ConfirmationPop.module.scss";
 
 // img
-
-export const allModels = {
-  logout: {
-    title: "Do you want to Logout?",
-    cancelText: "No",
-    confirmText: "Logout",
-  },
-  delete: {
-    title: "Are you sure you want to delete ?",
-    cancelText: "No",
-    confirmText: "Delete",
-  },
-  sure: {
-    title: "Are you sure ? ",
-    cancelText: "No",
-    confirmText: "yes",
-  },
-};
 
 const ConfirmationPop = ({
   confirmation,
@@ -30,8 +12,26 @@ const ConfirmationPop = ({
   confirmHandler,
   type,
 }) => {
+  const { t } = useTranslation();
   const hideHandler = () => {
     setConfirmation(false);
+  };
+  const allModels = {
+    logout: {
+      title: t("logoutTitle"),
+      cancelText: t("no"),
+      confirmText: t("logout"),
+    },
+    delete: {
+      title: t("deleteTitle"),
+      cancelText: t("no"),
+      confirmText: t("delete"),
+    },
+    sure: {
+      title: t("sureTitle"),
+      cancelText: t("no"),
+      confirmText: t("yes"),
+    },
   };
   return (
     <>

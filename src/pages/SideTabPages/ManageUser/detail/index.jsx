@@ -1,27 +1,19 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
-
-// img
-// import i1 from "@/Assets/images/authBg.jpeg";
-
 import { useEffect, useState } from "react";
-
-// img
-// import i1 from "@/Assets/images/authBg.jpeg";
-
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 import { GET_USER_BY_ID } from "../../../../services/ApiCalls";
-import { noImagePlaceHolder } from "../../../../utilities/const";
 import { catchAsync, checkResponse } from "../../../../utilities/utilities";
 
 const UserDetail = () => {
+  const { t } = useTranslation();
   const [userDetails, setUserUserDetails] = useState();
-  const [profileImage, setProfileImage] = useState();
   const { id } = useParams();
+
   const getData = catchAsync(async () => {
     const res = await GET_USER_BY_ID({ id });
-    const success = checkResponse({ res, setData: setUserUserDetails });
-    if (success) setProfileImage(res?.data?.data?.profileImage);
+    checkResponse({ res, setData: setUserUserDetails });
   });
 
   useEffect(() => {
@@ -54,7 +46,7 @@ const UserDetail = () => {
                   </svg>
                 </Link>
                 <h4 className="mb-0 py-3 fw-bold themePink text-capitalize">
-                  User Information
+                  {t("userInformation")}
                 </h4>
               </div>
             </Col>
@@ -64,24 +56,11 @@ const UserDetail = () => {
                 style={{ background: "#EEEEEE" }}
               >
                 <Row className="justify-content-between">
-                  {/* <Col lg="12" className="my-2">
-                    <div
-                      className="imgWrp text-center mx-auto"
-                      style={{ maxWidth: "max-content" }}
-                    >
-                      <img
-                        src={profileImage || noImagePlaceHolder}
-                        style={{ height: 140, width: 140 }}
-                        alt=""
-                        className="img-fluid rounded-circle object-fit-cover"
-                      />
-                    </div>
-                  </Col> */}
                   <Col md={6} className="my-2">
                     <ul className="list-unstyled ps-0 mb-0 notLastBorder pe-lg-3">
                       <li className="py-3 d-flex align-items-center gap-10">
                         <p className="m-0 themePink fw-sbold w-25">
-                          Full Name:
+                          {t("fullName")}:
                         </p>
                         <h6 className="m-0 text-muted fw-bold w-50">
                           {userDetails?.userName}
@@ -89,32 +68,20 @@ const UserDetail = () => {
                       </li>
 
                       <li className="py-3 d-flex align-items-center gap-10">
-                        <p className="m-0 themePink fw-sbold w-25">Email:</p>
+                        <p className="m-0 themePink fw-sbold w-25">
+                          {t("email")}:
+                        </p>
                         <h6 className="m-0 text-muted fw-bold w-50">
                           {userDetails?.email}
                         </h6>
                       </li>
-                      {/* <li className="py-3 d-flex align-items-center gap-10">
-                        <p className="m-0 themePink fw-sbold w-25">Address:</p>
-                        <h6 className="m-0 text-muted fw-bold w-50">
-                          {userDetails?.address}
-                        </h6>
-                      </li> */}
                     </ul>
                   </Col>
                   <Col md={6} className="my-2">
                     <ul className="list-unstyled mb-0 notLastBorder ps-lg-3">
-                      {/* <li className="py-3 d-flex align-items-center gap-10">
-                        <p className="m-0 themePink fw-sbold w-25">
-                          Phone Number:
-                        </p>
-                        <p className="m-0 text-muted fw-bold w-50">
-                          {userDetails?.mobileNumber}
-                        </p>
-                      </li> */}
                       <li className="py-3 d-flex align-items-center gap-10">
                         <p className="m-0 themePink fw-sbold w-25">
-                          Created at:
+                          {t("createdAt")}:
                         </p>
                         <h6 className="m-0 text-muted fw-bold w-50">
                           {moment(userDetails?.createdAt).format(
@@ -125,7 +92,7 @@ const UserDetail = () => {
                       <li className="py-3 d-flex align-items-center gap-10">
                         <p className="m-0 themePink fw-sbold w-25">
                           {" "}
-                          User status:
+                          {t("userStatus")}:
                         </p>
                         <h6
                           className={`mb-0 ${

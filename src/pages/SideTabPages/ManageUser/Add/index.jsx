@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
@@ -6,66 +6,58 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 // import i1 from "@/Assets/images/authBg.jpeg";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm } from "react-hook-form";
-import PhoneInput from "react-phone-input-2";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
-import Toggle from "../../../../components/Common/Toggle";
-import {
-  GET_USER_BY_ID,
-  UPDATE_USER,
-  USER_ADD,
-} from "../../../../services/ApiCalls";
+import { GET_USER_BY_ID, USER_ADD } from "../../../../services/ApiCalls";
 import { catchAsync, checkResponse } from "../../../../utilities/utilities";
+import { useTranslation } from "react-i18next";
 
-const getSchema = (editMode) =>
+const getSchema = (editMode, t) =>
   z
     .object({
       userName: z
         .string()
-        .min(1, { message: "Name is required" })
-        .max(35, { message: "Name must be less than 35 characters" }),
+        .min(1, { message: t("validation.nameRequired") })
+        .max(35, { message: t("validation.nameTooLong") }),
       email: z
         .string()
-        .min(1, { message: "Email is required" })
+        .min(1, { message: t("validation.emailRequired") })
         .trim()
-        .email("Invalid email address"),
+        .email(t("validation.emailInvalid")),
       password: z
-        .string({ message: "Password is required" })
-        .min(6, { message: "Password must contain 6 characters" }),
+        .string({ message: t("validation.passwordRequired") })
+        .min(6, { message: t("validation.passwordTooShort") }),
       gender: z.nativeEnum(["male", "female", "others"], {
-        invalid_type_error: "Please select the gender",
+        invalid_type_error: t("validation.genderRequired"),
       }),
     })
     .refine(
       (data) => {
         if (!editMode) {
-          if (data.password === "") {
-            return false;
-          }
+          if (data.password === "") return false;
         }
-        if (data.passwordToggle && data.password === "") {
-          return false;
-        }
+        if (data.passwordToggle && data.password === "") return false;
         return true;
       },
-      { message: "Password is required", path: ["password"] }
+      { message: t("validation.passwordRequired"), path: ["password"] }
     );
 
 const AddEditUser = () => {
+  const { t, i18n } = useTranslation();
   const [profileImage, setProfileImage] = useState({});
   const { id } = useParams();
   const [userDetails, setUserUserDetails] = useState();
   const [profileImageLoader, setProfileImageLoader] = useState(false);
-  const schema = useMemo(() => getSchema(id), [id]);
+  const schema = useMemo(() => getSchema(id, t), [id]);
   const [showPassWord, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    control,
-    setValue,
-    formState: { errors },
-    watch,
+
+    formState: { errors, isDirty },
+
+    trigger,
   } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {},
@@ -102,6 +94,8 @@ const AddEditUser = () => {
   useEffect(() => {
     if (id) getData();
   }, [id]);
+
+
 
   return (
     <>
@@ -144,7 +138,7 @@ const AddEditUser = () => {
                           htmlFor=""
                           className="form-label fw-sbold text-muted ps-2 m-0"
                         >
-                          User Name
+                          {t("userName")}
                         </label>
                         <input
                           type="text"
@@ -164,7 +158,7 @@ const AddEditUser = () => {
                           htmlFor=""
                           className="form-label fw-sbold text-muted ps-2 m-0"
                         >
-                          Gender
+                          {t("gender")}
                         </label>
                         <select
                           placeholder="Enter Name"
@@ -190,7 +184,7 @@ const AddEditUser = () => {
                           htmlFor=""
                           className="form-label fw-sbold text-muted ps-2 m-0"
                         >
-                          Email
+                          {t("email")}
                         </label>
                         <input
                           type="email"
@@ -205,36 +199,13 @@ const AddEditUser = () => {
                           </p>
                         )}
                       </div>
-                      {/* {id && (
-                        <div className="py-2">
-                          <label
-                            htmlFor=""
-                            className="form-label fw-sbold text-muted ps-2 m-0"
-                          >
-                            Change Password
-                          </label>
-                          <div className="iconWithText position-relative">
-                            <Toggle
-                              isChecked={watch("passwordToggle")}
-                              onChange={(e) =>
-                                setValue("passwordToggle", e.target.checked)
-                              }
-                            />
-                          </div>
-                        </div>
-                      )}
-                      {(!id || watch("passwordToggle")) && (
-                       
-
-
-                      )} */}
 
                       <div className="py-2">
                         <label
                           htmlFor=""
                           className="form-label fw-sbold text-muted ps-2 m-0"
                         >
-                          Password
+                          {t("password")}
                         </label>
                         <div className="iconWithText position-relative">
                           <input
@@ -278,14 +249,14 @@ const AddEditUser = () => {
                           type="button"
                           onClick={() => navigate(-1)}
                         >
-                          Cancel
+                          {t("cancel")}
                         </Button>
                         <Button
                           className="d-flex align-items-center justify-content-center commonBtn "
                           type="submit"
                           disabled={profileImageLoader}
                         >
-                          Submit
+                          {t("submit")}
                         </Button>
                       </div>
                     </Col>

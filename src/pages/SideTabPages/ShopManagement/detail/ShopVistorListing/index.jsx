@@ -14,8 +14,10 @@ import {
 } from "../../../../../services/ApiCalls";
 import { activeInactiveOptions } from "../../../../../utilities/const";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const ShopVisitorListing = ({ shopId }) => {
+  const { t } = useTranslation();
   const {
     setBody,
     statusChangeHandler,
@@ -49,15 +51,15 @@ const ShopVisitorListing = ({ shopId }) => {
       },
     },
     {
-      head: "User Name",
+      head: t("userName"),
       accessor: "name",
       component: (item, key, arr) => (
         <p className="m-0 themePink fw-sbold text-wrap">{item.userName}</p>
       ),
     },
-    { head: "Email", accessor: "email" },
+    { head: t("email"), accessor: "email" },
     {
-      head: "Date || Time ",
+      head: t("dateTime"),
       accessor: "createdAt",
       component: (item, key, arr) => (
         <>{moment(item.createdAt).format("DD-MM-YYYY  hh:mm:ss A")}</>
@@ -65,7 +67,7 @@ const ShopVisitorListing = ({ shopId }) => {
     },
 
     {
-      head: "Status",
+      head: t("status"),
       component: (item) => (
         <p
           className={`mb-0 ${
@@ -81,7 +83,7 @@ const ShopVisitorListing = ({ shopId }) => {
     },
 
     {
-      head: "Action",
+      head: t("action"),
       accessor: "Action",
       component: (item, ind) => (
         <TableActions

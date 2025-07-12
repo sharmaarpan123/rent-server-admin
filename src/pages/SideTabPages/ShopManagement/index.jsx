@@ -29,6 +29,7 @@ import {
 import CustomPagination from "../../../components/Common/CustomPagination";
 import Filter from "../../../components/Common/Filter";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const ShopManagement = () => {
   const {
@@ -47,6 +48,7 @@ const ShopManagement = () => {
     api: SHOPS_LIST,
     dataToSet: (data) => data?.data?.shopList,
   });
+  const { t } = useTranslation();
 
   const { admin } = useSelector((s) => s.login);
 
@@ -59,13 +61,13 @@ const ShopManagement = () => {
       },
     },
     {
-      head: "Name",
+      head: t("name"),
       accessor: "name",
       sortKey: "name",
     },
 
     {
-      head: "Status",
+      head: t("status"),
       component: (item) => (
         <p
           className={`mb-0  d-flex justify-content-start pb-0 rounded px-2 `}
@@ -79,7 +81,7 @@ const ShopManagement = () => {
     },
 
     {
-      head: "Date || Time ",
+      head: t("dateTime"),
       accessor: "createdAt",
       sortKey: "createdAt",
       component: (item, key, arr) => (
@@ -88,7 +90,7 @@ const ShopManagement = () => {
     },
 
     {
-      head: "Actions",
+      head: t("action"),
       component: (item) => {
         return (
           <TableActions
@@ -129,19 +131,6 @@ const ShopManagement = () => {
                       statusFilterOptionArr={activeInactiveOptions}
                       showStatusFilter={false}
                     />
-                  </ul>
-                </div>
-                <div className="right">
-                  <ul className="list-unstyled ps-0 mb-0 d-flex align-items-center gap-10 flex-wrap">
-                    {/* <li className="">
-                      <Link
-                        to={"/manage-shops/add"}
-                        className="d-flex btn btn-primary align-items-center justify-content-center fw-sbold commonBtn"
-                        style={{ height: 40, minWidth: 100, fontSize: 12 }}
-                      >
-                        Add New shop
-                      </Link>
-                    </li> */}
                   </ul>
                 </div>
               </div>
