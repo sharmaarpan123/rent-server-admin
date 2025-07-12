@@ -127,6 +127,11 @@ export const privateRoutes = [
     component: <ManagePassword />,
     title: "managePassword",
   },
+   {
+    path: "/notifications",
+    component: <Notification />,
+    title: "notifications",
+  },
 
   // not used yet this /////////////////******************* */
   { path: "/platform", component: <PlatForm />, title: "Platform" },
@@ -254,11 +259,7 @@ export const privateRoutes = [
     title: "Edit Module",
   },
 
-  {
-    path: "/notifications",
-    component: <Notification />,
-    title: "Notifications",
-  },
+ 
   {
     path: "/seller",
     component: <Sellers />,
