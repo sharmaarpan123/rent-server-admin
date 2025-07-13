@@ -1,11 +1,14 @@
-import React, { useState } from "react";
 import { Dropdown } from "react-bootstrap";
-import styles from "../component/LangDropDown.module.scss";
-import { langOptions } from "../../../utilities/const";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { updateLang } from "../../../store/actions";
-import { useTranslation } from "react-i18next";
+import styles from "./LangDropDown.module.scss";
 
+const langOptions = [
+  { label: "English", value: "en", img: "/images/English.jpeg" },
+  { label: "Spanish", value: "es", img: "/images/spanish.jpeg" },
+  { label: "French", value: "fr", img: "/images/french.jpeg" },
+];
 const LangDropDown = () => {
   const { currentLang } = useSelector((s) => s.login);
   const dispatch = useDispatch();
@@ -16,17 +19,22 @@ const LangDropDown = () => {
     i18n.changeLanguage(lng);
     localStorage.setItem("lang", lng);
   };
+
+  const currentSelectLanguage =
+    langOptions?.find((item) => item?.value === currentLang) || langOptions[0];
+
   return (
     <Dropdown className={`${styles.LangDropDown}`}>
       <Dropdown.Toggle variant="success" id="dropdown-basic">
-        {langOptions?.find((item) => item?.value === currentLang)?.label ||
-          "en"}
+        <img src={currentSelectLanguage?.img} className={`${styles.flagImg}`} />
+        {currentSelectLanguage?.label}
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
         {langOptions?.map((item) => {
           return (
             <Dropdown.Item onClick={() => handleChangeLanguage(item?.value)}>
+              <img src={item?.img} className={`${styles.flagImg}`} />{" "}
               {item?.label}
             </Dropdown.Item>
           );
