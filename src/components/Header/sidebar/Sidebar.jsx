@@ -20,7 +20,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
     <div
       className={`${styles.sidebar} ${
         sidebar && styles.active
-      } pt-4 position-fixed`}
+      } pt-2 position-fixed`}
     >
       <Button
         onClick={handleSidebar}

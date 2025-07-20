@@ -113,7 +113,7 @@ const Header = ({ sidebar, setSidebar, title }) => {
                     src={logo}
                     style={{ aspectRatio: 1, height: 40, width: 40 }}
                     alt=""
-                    className="img-fluid rounded-circle object-fit-cover flex-shrink-0"
+                    className="img-fluid  object-fit-cover flex-shrink-0"
                   />
                   <div className="content">
                     <p className="m-0 themeClr fw-sbold">{admin?.name}</p>
