@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 import styles from "./Auth.module.scss";
 
 // img
-import logo from "../../Assets/images/logo.jpeg";
+import logo from "../../Assets/images/logo.png";
 
 const AuthLayout = () => {
   return (

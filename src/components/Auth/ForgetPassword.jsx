@@ -80,10 +80,7 @@ const ForgetPassword = ({}) => {
           >
             <Row className="justify-content-center">
               <Col lg="12" className="my-2">
-                <label
-                  htmlFor=""
-                  className="form-label m-0 pb-1  fw-sbold"
-                >
+                <label htmlFor="" className="form-label m-0 pb-1  fw-sbold">
                   Email ID
                 </label>
                 <input

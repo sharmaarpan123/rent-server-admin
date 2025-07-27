@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 
 // img
-import i1 from "../../../Assets/images/authBg.jpeg";
+import i1 from "../../../Assets/images/authBg.png";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";

@@ -48,11 +48,11 @@ a {
 }
 
 .themeClr {
-  color: #ff00bf !important;
+  color: #412800 !important;
 }
 
 .themePink {
-  color: #ff00bf !important;
+  color: #412800 !important;
 }
 
 .secondaryClr {
@@ -95,17 +95,30 @@ input#custom-switch {
 }
 
 .commonBtn {
-  background: #ff00bf;
-  border-color: #ff00bf;
+  background: #412800;
+  border-color: #412800;
   height: 45px;
   font-size: 14px;
   border-radius: 25px;
   min-width: 130px;
 }
 
+
+
+
+.commonBtn:focus,
+.commonBtn:active,
+.commonBtn:disabled,
+.commonBtn:focus:active {
+  background: #412800;
+  border-color: #412800;
+
+}
+
+
 .commonBtn:hover {
-  background-color: #ea4fc3;
-  border-color: #e636ba;
+  background-color: #885c14;
+  border-color: #885c14;
 }
 
 textarea {
@@ -274,9 +287,18 @@ header .dropdown:has(.dropdown-menu.show) .position-fixed {
 
 /* pagination */
 .rc-pagination-item.rc-pagination-item-active {
-  background-color: #ff00bf !important;
-  border-color: #ff00bf !important;
+  background-color: #412800 !important;
+  border-color: #412800 !important;
 }
+
+.rc-pagination-item:hover,
+.rc-pagination-pre button:hover,
+.rc-pagination-next button:hover {
+
+  border-color: #412800 !important;
+}
+
+
 
 .rc-pagination-item,
 .rc-pagination-prev,
@@ -297,7 +319,7 @@ header .dropdown:has(.dropdown-menu.show) .position-fixed {
 }
 
 .rc-pagination-item.rc-pagination-item-active a {
-  border-color: #ff00bf !important;
+  border-color: #412800 !important;
 }
 
 .rc-pagination-item.rc-pagination-item-active a {

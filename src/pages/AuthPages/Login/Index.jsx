@@ -78,7 +78,6 @@ const Login = () => {
                   type="text"
                   className={`${styles.formControl} form-control`}
                   placeholder="example@gmail.com"
-              
                   {...register("email")}
                 />
                 {errors?.email && (
@@ -86,10 +85,7 @@ const Login = () => {
                 )}
               </Col>
               <Col lg="12" className="my-2">
-                <label
-                  htmlFor=""
-                  className="form-label m-0 pb-1  fw-sbold"
-                >
+                <label htmlFor="" className="form-label m-0 pb-1  fw-sbold">
                   Password
                 </label>
                 <div className="position-relative iconWithText">

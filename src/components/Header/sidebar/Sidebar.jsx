@@ -3,7 +3,7 @@ import styles from "./Sidebar.module.scss";
 
 // img
 import { Accordion, Button } from "react-bootstrap";
-import logo from "../../../Assets/images/logo.jpeg";
+import logo from "../../../Assets/images/logo.png";
 import { commonItems } from "./Routes";
 import { useTranslation } from "react-i18next";
 

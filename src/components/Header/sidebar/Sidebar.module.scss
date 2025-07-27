@@ -1,6 +1,6 @@
 .sidebar {
   width: 200px;
-  background: #3c0760;
+  background: #71501a;
   height: 100vh;
   z-index: 999;
   left: 0;
@@ -42,7 +42,7 @@
       }
       
       &:has(a.active) .accordionBtn button {
-        background-color: #ff00bf;
+        background-color: #412800;
       }
       
       .subLinks {
@@ -50,7 +50,7 @@
         line-height: 12px;
         color: #7a7a7a;
         &.active {
-          color: #ff00bf !important;
+          color: #412800 !important;
           font-weight: 600;
         }
       }
@@ -69,10 +69,10 @@
       gap: 10px;
       font-weight: 600;
       &.active {
-        background-color: #ff00bf;
+        background-color: #412800;
       }
       &:hover {
-        background-color: #ff00bf;
+        background-color: #412800;
       }
     }
   }

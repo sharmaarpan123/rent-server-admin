@@ -1,17 +1,15 @@
-import React from "react";
-import loader from "../../Assets/images/loader.gif";
+import styles from "./common.module.scss";
 
 const Loading = ({ fullSize }) => {
   return (
-    <img
-      alt="Loader"
-      className="object-contain"
+    <div
+      className={`${styles.loader} ${fullSize ? `${styles.loaderFul}` : ""}`}
       style={{
-        width: "3%",
-        ...(fullSize && { width: "100%", height: "100%" }),
+        ...(fullSize
+          ? { width: "100%", height: "100%" }
+          : { width: 40, height: 40 }),
       }}
-      src={loader}
-    />
+    ></div>
   );
 };
 

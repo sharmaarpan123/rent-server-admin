@@ -67,7 +67,7 @@ const AreaChart = () => {
           stops: [0, 90, 100],
         },
       },
-      colors: ["#ff00bf"],
+      colors: ["#71501a"],
       labels: series.dates,
       xaxis: {
         type: "datetime",
