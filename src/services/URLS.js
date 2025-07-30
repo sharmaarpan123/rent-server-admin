@@ -154,7 +154,7 @@ export default {
 
   UPDATE_USER: "/admin/user/updateUser",
   // ADD_USER: "/store/adduser",
-  // DELETE_USER: "/store/removeuser",
+  DELETE_USER: "/api/v1/admin/user-delete",
 
   // service provider
   SERVICE_PROVIDERS_LIST: "/store/vendors",

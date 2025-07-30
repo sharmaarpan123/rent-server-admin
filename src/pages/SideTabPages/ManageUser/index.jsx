@@ -11,6 +11,7 @@ import Toggle from "../../../components/Common/Toggle";
 import dataHandler from "../../../hooks/dataHandler";
 import {
   BLOCK_UNBLOCK_USER,
+  DELETE_USER,
   USER_LIST,
   USER_STATUS_CHANGE,
 } from "../../../services/ApiCalls";
@@ -21,6 +22,7 @@ import {
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import ConfirmationPop from "../../../components/Modals/ConfirmationPop";
 
 const ManageUser = () => {
   const {
@@ -31,6 +33,9 @@ const ManageUser = () => {
     loader,
     paginationHandler,
     searchHandler,
+    setDeleteModel,
+    deleteModel,
+    deleteHandler,
     total,
   } = dataHandler({
     api: USER_LIST,
@@ -98,6 +103,9 @@ const ManageUser = () => {
           }
           isBlocked={item?.isBlock}
           viewLink={"/manage-user/detail/" + item?._id}
+          setDeleteModel={() =>
+            setDeleteModel((p) => ({ show: true, dumpId: item?._id }))
+          }
         />
       ),
     },
@@ -105,6 +113,16 @@ const ManageUser = () => {
 
   return (
     <>
+      <ConfirmationPop
+        confirmHandler={() =>
+          deleteHandler(() => {
+            return DELETE_USER({ userId: deleteModel.dumpId });
+          })
+        }
+        confirmation={deleteModel.show}
+        setConfirmation={() => setDeleteModel({ show: false, dumpId: "" })}
+        type={"delete"}
+      />
       <section className="manageUser py-3 position-relative">
         <Container>
           <Row>

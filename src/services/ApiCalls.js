@@ -213,7 +213,7 @@ export const UPDATE_MODULE = (data) => Axios.post(API_URL.UPDATE_MODULE, data);
 // export const ADD_USER = (data) => Axios.post(API_URL.ADD_USER, data);
 
 export const UPDATE_USER = (data) => Axios.post(API_URL.UPDATE_USER, data);
-// export const DELETE_USER = (data) => Axios.post(API_URL.DELETE_USER, data);
+export const DELETE_USER = (data) => Axios.post(API_URL.DELETE_USER, data);
 export const USER_STATUS_CHANGE = (data) =>
   Axios.post(API_URL.USER_STATUS_CHANGE, data);
 
