@@ -95,7 +95,7 @@ const Dashboard = () => {
               <div className="card-body">
                 <Row className="align-items-end">
                   <Col md={3}>
-                    <div>
+                    <div className="d-flex flex-column">
                       <label className="">Start Date</label>
                       <DatePicker
                         selected={startDate}
@@ -110,7 +110,7 @@ const Dashboard = () => {
                     </div>
                   </Col>
                   <Col md={3}>
-                    <div>
+                    <div className="d-flex flex-column">
                       <label className="">End Date</label>
                       <DatePicker
                         selected={endDate}
