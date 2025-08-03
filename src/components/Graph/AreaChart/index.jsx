@@ -1,43 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
-// Mock data for series
-const series = {
-  prices: [
-    8107.85, 8128.0, 8122.9, 8165.5, 8340.7, 8423.7, 8423.5, 8514.3, 8481.85,
-    8487.7, 8506.9, 8626.2, 8668.95, 8602.3, 8607.55, 8512.9, 8496.25, 8600.65,
-    8881.1, 9340.85,
-  ],
-  dates: [
-    "2017-11-13",
-    "2017-11-14",
-    "2017-11-15",
-    "2017-11-16",
-    "2017-11-17",
-    "2017-11-20",
-    "2017-11-21",
-    "2017-11-22",
-    "2017-11-23",
-    "2017-11-24",
-    "2017-11-27",
-    "2017-11-28",
-    "2017-11-29",
-    "2017-11-30",
-    "2017-12-01",
-    "2017-12-04",
-    "2017-12-05",
-    "2017-12-06",
-    "2017-12-07",
-    "2017-12-08",
-  ],
-};
-
-const AreaChart = () => {
-  const chartOptions = {
+const AreaChart = ({ data }) => {
+  const [chartData, setChartData] = useState({
     series: [
       {
-        name: "Price",
-        data: series.prices,
+        name: "User Signups",
+        data: [],
       },
     ],
     options: {
@@ -68,7 +37,7 @@ const AreaChart = () => {
         },
       },
       colors: ["#71501a"],
-      labels: series.dates,
+      labels: [],
       xaxis: {
         type: "datetime",
       },
@@ -87,13 +56,37 @@ const AreaChart = () => {
         },
       },
     },
-  };
+  });
+
+  useEffect(() => {
+    if (data?.graphData && Array.isArray(data.graphData)) {
+      // Sort the data by date
+      const sortedData = data.graphData.sort((a, b) => new Date(a._id) - new Date(b._id));
+      
+      const dates = sortedData.map(item => item._id);
+      const counts = sortedData.map(item => item.count);
+
+      setChartData(prev => ({
+        ...prev,
+        series: [
+          {
+            name: "User Signups",
+            data: counts,
+          },
+        ],
+        options: {
+          ...prev.options,
+          labels: dates,
+        },
+      }));
+    }
+  }, [data]);
 
   return (
     <div>
       <ReactApexChart
-        options={chartOptions.options}
-        series={chartOptions.series}
+        options={chartData.options}
+        series={chartData.series}
         type="area"
         height={350}
       />

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Form, Button } from "react-bootstrap";
+import DatePicker from "react-datepicker";
 
 // css
 import "react-datepicker/dist/react-datepicker.css";
@@ -22,11 +23,30 @@ import { useTranslation } from "react-i18next";
 const Dashboard = () => {
   const [data, setData] = useState({});
   const [loader, setLoader] = useState(false);
+  const [startDate, setStartDate] = useState(
+    new Date(Date.now() - 150 * 24 * 60 * 60 * 1000)
+  ); // 7 days ago
+  const [endDate, setEndDate] = useState(new Date()); // today
+  const [dateError, setDateError] = useState("");
   const { t } = useTranslation();
+
   const getDashBoardData = catchAsync(async () => {
     setLoader(true);
+    setDateError("");
 
-    const res = await DASHBOARD();
+    // Validate dates
+    if (startDate >= endDate) {
+      setDateError("Start date must be less than end date");
+      setLoader(false);
+      return;
+    }
+
+    const params = {
+      startDate: startDate.toISOString().split("T")[0],
+      endDate: endDate.toISOString().split("T")[0],
+    };
+
+    const res = await DASHBOARD(params);
 
     checkResponse({ res, setData, setLoader });
   }, setLoader);
@@ -35,9 +55,23 @@ const Dashboard = () => {
     getDashBoardData();
   }, []);
 
+  const handleDateChange = (type, date) => {
+    if (type === "start") {
+      setStartDate(date);
+    } else {
+      setEndDate(date);
+    }
+  };
+
+  const handleFilter = () => {
+    getDashBoardData();
+  };
+
   return (
     <section className="dashboard-container py-4">
       <Container fluid>
+        {/* Date Filter Section */}
+
         {/* Feature Cards */}
         <Row className="mb-4">
           <Col xs={12}>
@@ -49,6 +83,66 @@ const Dashboard = () => {
                 queries: data?.queries || 20000000,
               }}
             />
+          </Col>
+        </Row>
+
+        <Row className="mb-4">
+          <Col xs={12}>
+            <div className="dashboard-card">
+              <div className="card-header">
+                <h5 className="mb-0">Date Filter</h5>
+              </div>
+              <div className="card-body">
+                <Row className="align-items-end">
+                  <Col md={3}>
+                    <Form.Group>
+                      <Form.Label>Start Date</Form.Label>
+                      <DatePicker
+                        selected={startDate}
+                        onChange={(date) => handleDateChange("start", date)}
+                        selectsStart
+                        startDate={startDate}
+                        endDate={endDate}
+                        maxDate={endDate}
+                        className="form-control"
+                        dateFormat="yyyy-MM-dd"
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={3}>
+                    <Form.Group>
+                      <Form.Label>End Date</Form.Label>
+                      <DatePicker
+                        selected={endDate}
+                        onChange={(date) => handleDateChange("end", date)}
+                        selectsEnd
+                        startDate={startDate}
+                        endDate={endDate}
+                        minDate={startDate}
+                        maxDate={new Date()}
+                        className="form-control"
+                        dateFormat="yyyy-MM-dd"
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={3}>
+                    <Button
+                      className="commonBtn"
+                      variant="primary"
+                      onClick={handleFilter}
+                      disabled={loader}
+                    >
+                      {loader ? "Loading..." : "Apply Filter"}
+                    </Button>
+                  </Col>
+                  {dateError && (
+                    <Col md={12} className="mt-2">
+                      <div className="text-danger">{dateError}</div>
+                    </Col>
+                  )}
+                </Row>
+              </div>
+            </div>
           </Col>
         </Row>
 
