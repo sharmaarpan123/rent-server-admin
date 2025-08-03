@@ -95,8 +95,8 @@ const Dashboard = () => {
               <div className="card-body">
                 <Row className="align-items-end">
                   <Col md={3}>
-                    <Form.Group>
-                      <Form.Label>Start Date</Form.Label>
+                    <div>
+                      <label className="">Start Date</label>
                       <DatePicker
                         selected={startDate}
                         onChange={(date) => handleDateChange("start", date)}
@@ -107,11 +107,11 @@ const Dashboard = () => {
                         className="form-control"
                         dateFormat="yyyy-MM-dd"
                       />
-                    </Form.Group>
+                    </div>
                   </Col>
                   <Col md={3}>
-                    <Form.Group>
-                      <Form.Label>End Date</Form.Label>
+                    <div>
+                      <label className="">End Date</label>
                       <DatePicker
                         selected={endDate}
                         onChange={(date) => handleDateChange("end", date)}
@@ -123,7 +123,7 @@ const Dashboard = () => {
                         className="form-control"
                         dateFormat="yyyy-MM-dd"
                       />
-                    </Form.Group>
+                    </div>
                   </Col>
                   <Col md={3}>
                     <Button
