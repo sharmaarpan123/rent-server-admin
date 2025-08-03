@@ -58,7 +58,10 @@ const ConfirmationPop = ({
               <div className="px-2 w-100">
                 <Button
                   onClick={confirmHandler}
-                  className="fw-sbold d-flex align-items-center justify-content-center commonBtn w-100"
+                  className={`fw-sbold d-flex align-items-center justify-content-center commonBtn w-100  ${
+                    ["delete", "logout"].includes(type) &&
+                    ` ${styles.dangerThemeBtn}`
+                  }`}
                 >
                   {allModels[type]?.confirmText}
                 </Button>

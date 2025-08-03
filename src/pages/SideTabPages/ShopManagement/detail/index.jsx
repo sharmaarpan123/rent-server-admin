@@ -42,7 +42,7 @@ const ShopDetails = () => {
             <Col lg="12">
               <div className="d-flex align-items-center gap-10">
                 <Link
-                  to="/category"
+                  to="/manage-shops"
                   className="border d-flex align-items-center p-2 rounded"
                 >
                   <svg
