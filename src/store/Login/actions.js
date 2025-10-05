@@ -2,8 +2,7 @@ import * as CONST from "./actionTypes";
 
 export const loginAdmin = (payload, callBack) => {
   return {
-    type:
-      payload?.userType === "agency" ? CONST.LOGIN_ADMIN : CONST.LOGIN_SELLER,
+    type: CONST.LOGIN_ADMIN,
     payload,
     callBack,
   };

@@ -34,6 +34,7 @@ const schema = z.object({
 const Login = () => {
   const navigate = useNavigate();
   const [pass, setPass] = useState();
+  const [userRole, setUserRole] = useState("admin");
   const handlePass = () => {
     setPass(!pass);
   };
@@ -48,10 +49,16 @@ const Login = () => {
   });
 
   const submitHandler = async (data) => {
-    const callBack = (status) => {
-      navigate("/dashboard");
+    const callBack = (data) => {
+      console.log(data , "dataaa")
+      if (data?.role === "User") {
+        navigate("/shop-owner/dashboard");
+      } else {
+        navigate("/dashboard");
+      }
     };
-    dispatch(loginAdmin({ ...data, userType: "agency" }, callBack));
+
+    dispatch(loginAdmin({ ...data }, callBack));
   };
 
   return (

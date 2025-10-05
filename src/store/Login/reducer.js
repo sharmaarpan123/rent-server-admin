@@ -12,6 +12,8 @@ const intialState = {
   _id: (localStorage && localStorage.getItem("_id")) || null,
   profileImage: (localStorage && localStorage.getItem("profileImage")) || null,
   currentLang: (localStorage && localStorage.getItem("lang")) || null,
+  loginUserRole:
+    (localStorage && localStorage.getItem("loginUserRole")) || "Admin",
 };
 
 const LoginReducer = (state = intialState, { type, payload }) => {
@@ -22,16 +24,18 @@ const LoginReducer = (state = intialState, { type, payload }) => {
         loading: true,
       };
     case CONST.LOGIN_ADMIN_SUCCESS:
+      localStorage.setItem("loginUserRole", payload.role || "Admin");
       return {
         ...state,
         isLogin: true,
         loading: false,
-
+        loginUserRole: payload.role || "Admin",
         token: payload.token,
         admin: payload,
         _id: payload?._id,
         profileImage: payload?.profileImage,
       };
+
     case CONST.LOGIN_ADMIN_FAIL:
       return {
         ...state,

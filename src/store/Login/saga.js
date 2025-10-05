@@ -1,9 +1,9 @@
-import { put, call, takeEvery } from "redux-saga/effects";
+import { toast } from "react-toastify";
+import { call, put, takeEvery } from "redux-saga/effects";
+import requestNotificationPermission from "../../firebase";
+import { LOGIN_ADMIN } from "../../services/ApiCalls";
 import * as CONST from "./actionTypes";
 import * as ACTION from "./actions";
-import { toast } from "react-toastify";
-import { LOGIN_ADMIN, LOGIN_SELLER } from "../../services/ApiCalls";
-import requestNotificationPermission from "../../firebase";
 
 function* loginUserSaga({ payload, callBack }) {
   try {
@@ -15,7 +15,11 @@ function* loginUserSaga({ payload, callBack }) {
       localStorage.setItem("token", response?.data?.data?.token || "");
       localStorage.setItem("_id", response?.data?.data?._id);
       localStorage.setItem("admin", JSON.stringify(response?.data?.data));
-      callBack && callBack();
+      localStorage.setItem(
+        "loginUserRole",
+        response?.data?.data?.role || "Admin"
+      );
+      callBack && callBack(response?.data?.data);
       yield put(
         ACTION.loginAdmin_Success({
           ...response?.data?.data,
