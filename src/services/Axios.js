@@ -29,13 +29,13 @@ class Axios {
   };
 
   LogoutUser = (url) => {
-    // if (url?.response !== undefined && url?.response?.status === 401) {
-    //   // console.log(url.response.status, "401 Unauthorized Api Call");
-    //   localStorage.clear();
-    //   window.location.replace("/");
-    // } else {
-    //   // console.log(url, "401 Unauthorized Api Call");
-    // }
+    if (url?.response !== undefined && url?.response?.status === 401) {
+      // console.log(url.response.status, "401 Unauthorized Api Call");
+      localStorage.clear();
+      window.location.replace("/");
+    } else {
+      // console.log(url, "401 Unauthorized Api Call");
+    }
   };
 
   get = (url, options = {}) => {
