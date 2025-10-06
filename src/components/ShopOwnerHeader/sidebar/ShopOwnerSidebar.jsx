@@ -11,7 +11,7 @@ const ShopOwnerSidebar = ({ sidebar, setSidebar }) => {
     setSidebar((p) => !p);
   };
   const { t } = useTranslation();
-  
+
   const navItems = [
     {
       path: "/shop-owner/dashboard",
@@ -29,11 +29,11 @@ const ShopOwnerSidebar = ({ sidebar, setSidebar }) => {
             fill="currentColor"
           />
         </svg>
-      )
+      ),
     },
     {
-      path: "/shop-owner/visitors",
-      name: "Visitors",
+      path: "/shop-owner/shops",
+      name: "Shops",
       icon: () => (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +47,7 @@ const ShopOwnerSidebar = ({ sidebar, setSidebar }) => {
             fill="currentColor"
           />
         </svg>
-      )
+      ),
     },
     {
       path: "/shop-owner/queries",
@@ -65,7 +65,7 @@ const ShopOwnerSidebar = ({ sidebar, setSidebar }) => {
             fill="currentColor"
           />
         </svg>
-      )
+      ),
     },
     {
       path: "/shop-owner/profile",
@@ -83,8 +83,8 @@ const ShopOwnerSidebar = ({ sidebar, setSidebar }) => {
             fill="currentColor"
           />
         </svg>
-      )
-    }
+      ),
+    },
   ];
 
   return (

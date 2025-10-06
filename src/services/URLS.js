@@ -28,6 +28,10 @@ export default {
   SHOP_EDIT: "/api/v1/admin/shop-edit",
   SHOP_VISITOR_LISTING: "/api/v1/admin/shop-visitors-list",
 
+  // Shop Owner APIs
+  SHOP_OWNER_DASHBOARD: "/api/v1/user/owner-dashboard",
+  SHOP_OWNER_SHOP_LIST: "/api/v1/admin/shop-list",
+
   // not used yet
 
   SCRAPPER_URL: "http://127.0.0.1:5000/fetch-image",

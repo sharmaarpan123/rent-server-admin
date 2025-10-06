@@ -4,33 +4,29 @@ import AreaChart from "../../../components/Graph/AreaChart";
 import Loading from "../../../components/Common/Loading";
 import styles from "./Dashboard.module.scss";
 import { useTranslation } from "react-i18next";
-
-// Static data for shop owner dashboard
-const staticData = {
-  totalRentedShops: 15,
-  visitorsData: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-    series: [
-      {
-        name: "Visitors",
-        data: [120, 150, 180, 200, 160, 220]
-      }
-    ]
-  }
-};
+import { SHOP_OWNER_DASHBOARD } from "../../../services/ApiCalls";
+import { catchAsync, checkResponse } from "../../../utilities/utilities";
 
 const ShopOwnerDashboard = () => {
-  const [data, setData] = useState(staticData);
+  const [data, setData] = useState({
+    storeCount: 0,
+    queryCount: 0
+  });
   const [loader, setLoader] = useState(false);
   const { t } = useTranslation();
 
-  useEffect(() => {
-    // Simulate API call
+  const getDashboardData = catchAsync(async () => {
     setLoader(true);
-    setTimeout(() => {
-      setData(staticData);
-      setLoader(false);
-    }, 1000);
+    const res = await SHOP_OWNER_DASHBOARD({});
+    checkResponse({ 
+      res, 
+      setData: (responseData) => setData(responseData), 
+      setLoader 
+    });
+  }, setLoader);
+
+  useEffect(() => {
+    getDashboardData();
   }, []);
 
   if (loader) {
@@ -40,34 +36,35 @@ const ShopOwnerDashboard = () => {
   return (
     <section className="shop-owner-dashboard py-4">
       <Container fluid>
-        {/* Total Rented Shops Card */}
+        {/* Store Count Card */}
         <Row className="mb-4">
-          <Col xs={12}>
+          <Col xs={12} md={6}>
             <div className="dashboard-card">
               <div className="card-header">
-                <h5 className="mb-0">Total Rented Shops</h5>
+                <h5 className="mb-0">Total Stores</h5>
               </div>
               <div className="card-body">
                 <div className="d-flex align-items-center justify-content-center">
                   <div className="text-center">
-                    <h2 className="display-4 text-primary mb-0">{data.totalRentedShops}</h2>
-                    <p className="text-muted mb-0">Active Rentals</p>
+                    <h2 className="display-4 text-primary mb-0">{data.storeCount}</h2>
+                    <p className="text-muted mb-0">Active Stores</p>
                   </div>
                 </div>
               </div>
             </div>
           </Col>
-        </Row>
-
-        {/* Visitors Chart */}
-        <Row className="mb-4">
-          <Col xs={12}>
+          <Col xs={12} md={6}>
             <div className="dashboard-card">
               <div className="card-header">
-                <h5 className="mb-0">Shop Visitors Over Time</h5>
+                <h5 className="mb-0">Total Queries</h5>
               </div>
               <div className="card-body">
-                <AreaChart data={data.visitorsData} />
+                <div className="d-flex align-items-center justify-content-center">
+                  <div className="text-center">
+                    <h2 className="display-4 text-success mb-0">{data.queryCount}</h2>
+                    <p className="text-muted mb-0">Customer Queries</p>
+                  </div>
+                </div>
               </div>
             </div>
           </Col>

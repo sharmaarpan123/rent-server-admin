@@ -16,7 +16,7 @@ const ShopOwnerHeader = ({ sidebar, setSidebar, title }) => {
   const location = useLocation();
   const [confirmation, setConfirmation] = useState();
   const { t } = useTranslation();
-  const { admin } = useSelector((s) => s.login);
+  const user = useSelector((state) => state?.login?.admin);
 
   const handleSidebar = () => {
     setSidebar(!sidebar);
@@ -81,10 +81,7 @@ const ShopOwnerHeader = ({ sidebar, setSidebar, title }) => {
               {t(title)}
             </h6>
 
-            <Navbar.Collapse
-              className="justify-content-end"
-              id="navbarScroll"
-            >
+            <Navbar.Collapse className="justify-content-end" id="navbarScroll">
               <Nav className="my-2 my-lg-0 align-items-center justify-content-between">
                 <LangDropDown />
                 <Link
@@ -98,8 +95,8 @@ const ShopOwnerHeader = ({ sidebar, setSidebar, title }) => {
                     className="img-fluid object-fit-cover flex-shrink-0"
                   />
                   <div className="content">
-                    <p className="m-0 themeClr fw-sbold">Shop Owner</p>
-                    <p className="m-0 text-muted fw-sbold">Owner</p>
+                    <p className="m-0 themeClr fw-sbold">{user?.userName}</p>
+                    <p className="m-0 text-muted fw-sbold">{user?.email}</p>
                   </div>
                 </Link>
                 <Button

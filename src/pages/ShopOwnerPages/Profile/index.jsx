@@ -5,16 +5,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useTranslation } from "react-i18next";
 import { successToast, errorToast } from "../../../utilities/utilities";
+import { useSelector } from "react-redux";
 
 // Static profile data
 const staticProfileData = {
   firstName: "John",
-  lastName: "Doe", 
+  lastName: "Doe",
   email: "john.doe@example.com",
   phone: "+1234567890",
   address: "123 Main Street, City, State 12345",
   businessName: "Doe's Shop Management",
-  businessType: "Retail"
+  businessType: "Retail",
 };
 
 const schema = z.object({
@@ -31,6 +32,7 @@ const ShopOwnerProfile = () => {
   const { t } = useTranslation();
   const [loader, setLoader] = useState(false);
   const [profileData, setProfileData] = useState(staticProfileData);
+  const user = useSelector((state) => state?.login?.admin);
 
   const {
     register,
@@ -40,17 +42,18 @@ const ShopOwnerProfile = () => {
   } = useForm({
     resolver: zodResolver(schema),
     defaultValues: profileData,
+    values: {
+      userName: user?.userName || "",
+      firstName: user?.firstName || "",
+      email: user?.email || "",
+    },
   });
 
-  useEffect(() => {
-    // Load profile data
-    setProfileData(staticProfileData);
-    reset(staticProfileData);
-  }, [reset]);
+  console.log(user, "user");
 
   const onSubmit = async (data) => {
     setLoader(true);
-    
+
     // Simulate API call
     setTimeout(() => {
       setProfileData(data);
@@ -73,26 +76,12 @@ const ShopOwnerProfile = () => {
                   <Row>
                     <Col md={6}>
                       <Form.Group className="mb-3">
-                        <Form.Label>First Name *</Form.Label>
+                        <Form.Label>User Name *</Form.Label>
                         <Form.Control
                           type="text"
-                          {...register("firstName")}
-                          isInvalid={!!errors.firstName}
-                        />
-                        {errors.firstName && (
-                          <Form.Control.Feedback type="invalid">
-                            {errors.firstName.message}
-                          </Form.Control.Feedback>
-                        )}
-                      </Form.Group>
-                    </Col>
-                    <Col md={6}>
-                      <Form.Group className="mb-3">
-                        <Form.Label>Last Name *</Form.Label>
-                        <Form.Control
-                          type="text"
-                          {...register("lastName")}
+                          {...register("userName")}
                           isInvalid={!!errors.lastName}
+                          readOnly
                         />
                         {errors.lastName && (
                           <Form.Control.Feedback type="invalid">
@@ -101,9 +90,6 @@ const ShopOwnerProfile = () => {
                         )}
                       </Form.Group>
                     </Col>
-                  </Row>
-
-                  <Row>
                     <Col md={6}>
                       <Form.Group className="mb-3">
                         <Form.Label>Email *</Form.Label>
@@ -111,6 +97,7 @@ const ShopOwnerProfile = () => {
                           type="email"
                           {...register("email")}
                           isInvalid={!!errors.email}
+                          readOnly
                         />
                         {errors.email && (
                           <Form.Control.Feedback type="invalid">
@@ -119,93 +106,7 @@ const ShopOwnerProfile = () => {
                         )}
                       </Form.Group>
                     </Col>
-                    <Col md={6}>
-                      <Form.Group className="mb-3">
-                        <Form.Label>Phone *</Form.Label>
-                        <Form.Control
-                          type="tel"
-                          {...register("phone")}
-                          isInvalid={!!errors.phone}
-                        />
-                        {errors.phone && (
-                          <Form.Control.Feedback type="invalid">
-                            {errors.phone.message}
-                          </Form.Control.Feedback>
-                        )}
-                      </Form.Group>
-                    </Col>
                   </Row>
-
-                  <Form.Group className="mb-3">
-                    <Form.Label>Address *</Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      rows={3}
-                      {...register("address")}
-                      isInvalid={!!errors.address}
-                    />
-                    {errors.address && (
-                      <Form.Control.Feedback type="invalid">
-                        {errors.address.message}
-                      </Form.Control.Feedback>
-                    )}
-                  </Form.Group>
-
-                  <Row>
-                    <Col md={6}>
-                      <Form.Group className="mb-3">
-                        <Form.Label>Business Name *</Form.Label>
-                        <Form.Control
-                          type="text"
-                          {...register("businessName")}
-                          isInvalid={!!errors.businessName}
-                        />
-                        {errors.businessName && (
-                          <Form.Control.Feedback type="invalid">
-                            {errors.businessName.message}
-                          </Form.Control.Feedback>
-                        )}
-                      </Form.Group>
-                    </Col>
-                    <Col md={6}>
-                      <Form.Group className="mb-3">
-                        <Form.Label>Business Type *</Form.Label>
-                        <Form.Select
-                          {...register("businessType")}
-                          isInvalid={!!errors.businessType}
-                        >
-                          <option value="">Select Business Type</option>
-                          <option value="Retail">Retail</option>
-                          <option value="Restaurant">Restaurant</option>
-                          <option value="Office">Office</option>
-                          <option value="Warehouse">Warehouse</option>
-                          <option value="Other">Other</option>
-                        </Form.Select>
-                        {errors.businessType && (
-                          <Form.Control.Feedback type="invalid">
-                            {errors.businessType.message}
-                          </Form.Control.Feedback>
-                        )}
-                      </Form.Group>
-                    </Col>
-                  </Row>
-
-                  <div className="d-flex justify-content-end gap-2">
-                    <Button
-                      type="button"
-                      variant="secondary"
-                      onClick={() => reset(profileData)}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      type="submit"
-                      variant="primary"
-                      disabled={loader}
-                    >
-                      {loader ? "Updating..." : "Update Profile"}
-                    </Button>
-                  </div>
                 </Form>
               </Card.Body>
             </Card>

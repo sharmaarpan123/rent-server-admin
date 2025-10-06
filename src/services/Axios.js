@@ -13,23 +13,29 @@ class Axios {
         },
       };
     }
+
+    const loginUserRole = localStorage.getItem("loginUserRole") || "";
+
+    console.log(loginUserRole, "loginUserRole");
+
     return {
       baseURL: `${API_URL}`,
       headers: {
-        Authorization: "Bearer" + " " + localStorage.getItem("token") || "",
+        [loginUserRole == "User" ? "x-access-token" : "Authorization"]:
+          "Bearer" + " " + localStorage.getItem("token") || "",
         lang: localStorage.getItem("lang") || "en",
       },
     };
   };
 
   LogoutUser = (url) => {
-    if (url?.response !== undefined && url?.response?.status === 401) {
-      // console.log(url.response.status, "401 Unauthorized Api Call");
-      localStorage.clear();
-      window.location.replace("/");
-    } else {
-      // console.log(url, "401 Unauthorized Api Call");
-    }
+    // if (url?.response !== undefined && url?.response?.status === 401) {
+    //   // console.log(url.response.status, "401 Unauthorized Api Call");
+    //   localStorage.clear();
+    //   window.location.replace("/");
+    // } else {
+    //   // console.log(url, "401 Unauthorized Api Call");
+    // }
   };
 
   get = (url, options = {}) => {

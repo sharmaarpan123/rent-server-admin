@@ -6,8 +6,9 @@ const intialState = {
   isLogin: false,
   loading: false,
   meQueryLoading: false,
-  // admin:  localStorage.getItem("admin") ? JSON.parse(localStorage.getItem("admin") ||{}/
-
+  admin: localStorage.getItem("admin")
+    ? JSON.parse(localStorage.getItem("admin") || {})
+    : {},
   token: (localStorage && localStorage.getItem("token")) || null,
   _id: (localStorage && localStorage.getItem("_id")) || null,
   profileImage: (localStorage && localStorage.getItem("profileImage")) || null,

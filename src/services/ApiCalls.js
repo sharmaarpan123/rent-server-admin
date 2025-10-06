@@ -89,6 +89,11 @@ export const BRAND_UPDATE_STATUS = (data) =>
 
 // DEAL
 
+// Shop Owner Dashboard
+export const SHOP_OWNER_DASHBOARD = (data) => Axios.post(API_URL.SHOP_OWNER_DASHBOARD, data);
+export const SHOP_OWNER_SHOP_LIST = (data) => Axios.post(API_URL.SHOP_OWNER_SHOP_LIST, data);
+
+
 export const ADD_DEAL = (data) => Axios.post(API_URL.ADD_DEAL, data);
 export const BULK_ADD_DEAL = (data) => Axios.post(API_URL.BULK_ADD_DEAL, data);
 export const EDIT_DEAL = (data) => Axios.post(API_URL.EDIT_DEAL, data);
