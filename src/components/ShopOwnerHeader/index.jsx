@@ -42,7 +42,7 @@ const ShopOwnerHeader = ({ sidebar, setSidebar, title }) => {
         className={`${styles.siteHeader} siteHeader bg-white sticky-top w-100`}
         style={{ zIndex: 99 }}
       >
-        <Container>
+        <div className="px-4">
           <Navbar
             expand="lg"
             className="border-bottom border-dark px-lg-3 d-flex justi"
@@ -129,7 +129,7 @@ const ShopOwnerHeader = ({ sidebar, setSidebar, title }) => {
               </Nav>
             </Navbar.Collapse>
           </Navbar>
-        </Container>
+        </div>
       </header>
     </>
   );
