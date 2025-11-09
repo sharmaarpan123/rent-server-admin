@@ -11,6 +11,7 @@ import {
   FaChartLine,
   FaUsers,
 } from "react-icons/fa";
+import ShopOwnerAreaChart from "./AreaChart";
 
 const ShopOwnerDashboard = () => {
   const [data, setData] = useState({
@@ -36,7 +37,10 @@ const ShopOwnerDashboard = () => {
 
   if (loader) {
     return (
-      <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "100vh" }}
+      >
         <Loading />
       </div>
     );
@@ -153,6 +157,23 @@ const ShopOwnerDashboard = () => {
               </div>
             </Col>
           ))}
+        </Row>
+        <Row className="g-4">
+          <Col lg={12}>
+            <div className="box h-100" style={{
+              background: "#fff",
+              borderRadius: "15px",
+              border: "1px solid #f0f0f0",
+              padding: "20px",
+            }}>
+              <div className="mb-3">
+                <h5 className="mb-0 fw-bold themeClr">Shop Visitors Over Time</h5>
+              </div>
+              <div>
+                <ShopOwnerAreaChart />
+              </div>
+            </div>
+          </Col>
         </Row>
       </Container>
     </section>
