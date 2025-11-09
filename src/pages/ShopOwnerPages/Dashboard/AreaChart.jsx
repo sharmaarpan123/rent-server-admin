@@ -32,7 +32,7 @@ const ShopOwnerAreaChart = () => {
   const chartData = {
     series: [
       {
-        name: "User Signups",
+        name: "Total Users",
         data: counts,
       },
     ],
