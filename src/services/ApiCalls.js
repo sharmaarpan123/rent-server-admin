@@ -19,7 +19,8 @@ export const DASHBOARD = (data) => Axios.post(API_URL.DASHBOARD, data);
 export const QUERIES_LIST = (data) => Axios.post(API_URL.QUERIES_LIST, data);
 //USERS
 export const USER_LIST = (data) => Axios.post(API_URL.USER_LIST, data);
-export const GET_USER_BY_ID = (data) => Axios.post(API_URL.GET_USER_BY_ID, data);
+export const GET_USER_BY_ID = (data) =>
+  Axios.post(API_URL.GET_USER_BY_ID, data);
 export const USER_ADD = (data) => Axios.post(API_URL.USER_ADD, data);
 
 export const BLOCK_UNBLOCK_USER = (id) => Axios.put(API_URL.BLOCK_USER + id);
@@ -31,7 +32,8 @@ export const SHOP_ADD = (data) => Axios.post(API_URL.SHOP_ADD, data);
 export const SHOP_VIEW = (data) => Axios.post(API_URL.SHOP_VIEW, data);
 export const SHOP_DELETE = (data) => Axios.post(API_URL.SHOP_DELETE, data);
 export const SHOP_EDIT = (data) => Axios.post(API_URL.SHOP_EDIT, data);
-export const SHOP_VISITOR_LISTING = (data) => Axios.post(API_URL.SHOP_VISITOR_LISTING, data);
+export const SHOP_VISITOR_LISTING = (data) =>
+  Axios.post(API_URL.SHOP_VISITOR_LISTING, data);
 
 ////////////////////////////////// this api are already imported at some where so no time remove that other wise it will give errors
 
@@ -90,9 +92,10 @@ export const BRAND_UPDATE_STATUS = (data) =>
 // DEAL
 
 // Shop Owner Dashboard
-export const SHOP_OWNER_DASHBOARD = (data) => Axios.post(API_URL.SHOP_OWNER_DASHBOARD, data);
-export const SHOP_OWNER_SHOP_LIST = (data) => Axios.post(API_URL.SHOP_OWNER_SHOP_LIST, data);
-
+export const SHOP_OWNER_DASHBOARD = (data) =>
+  Axios.post(API_URL.SHOP_OWNER_DASHBOARD, data);
+export const SHOP_OWNER_SHOP_LIST = (data) =>
+  Axios.post(API_URL.SHOP_OWNER_SHOP_LIST, data);
 
 export const ADD_DEAL = (data) => Axios.post(API_URL.ADD_DEAL, data);
 export const BULK_ADD_DEAL = (data) => Axios.post(API_URL.BULK_ADD_DEAL, data);
@@ -248,3 +251,7 @@ export const DELETE_SERVICE_CATEGORY = (data) =>
   Axios.post(API_URL.DELETE_SERVICE_CATEGORY, data);
 export const VIEW_SERVICE_CATEGORY = (data) =>
   Axios.get(API_URL.VIEW_SERVICE_CATEGORY + data);
+
+// shop owner queries
+export const SHOP_OWNER_QUERIES_LIST = (data) =>
+  Axios.post(API_URL.QUERIES_LIST, data);

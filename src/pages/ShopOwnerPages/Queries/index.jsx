@@ -3,100 +3,33 @@ import TableLayout from "../../../components/TableLayout";
 import moment from "moment";
 import CustomPagination from "../../../components/Common/CustomPagination";
 import Filter from "../../../components/Common/Filter";
+import dataHandler from "../../../hooks/dataHandler";
+import { SHOP_OWNER_QUERIES_LIST } from "../../../services/ApiCalls";
 import { activeInactiveOptions } from "../../../utilities/const";
 import { capitalizedFirstAlphaBet } from "../../../utilities/utilities";
-import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-
-// Static data for shop owner queries
-const staticQueriesData = [
-  {
-    _id: "1",
-    user: {
-      userName: "john_doe"
-    },
-    email: "john@example.com",
-    concern: "Shop maintenance issue",
-    createdAt: "2024-01-15T10:30:00Z"
-  },
-  {
-    _id: "2",
-    user: {
-      userName: "jane_smith"
-    },
-    email: "jane@example.com", 
-    concern: "Rent payment inquiry",
-    createdAt: "2024-01-14T14:20:00Z"
-  },
-  {
-    _id: "3",
-    user: {
-      userName: "mike_johnson"
-    },
-    email: "mike@example.com",
-    concern: "Shop access problem",
-    createdAt: "2024-01-13T09:15:00Z"
-  },
-  {
-    _id: "4",
-    user: {
-      userName: "sarah_wilson"
-    },
-    email: "sarah@example.com",
-    concern: "Lease renewal question",
-    createdAt: "2024-01-12T16:45:00Z"
-  },
-  {
-    _id: "5",
-    user: {
-      userName: "david_brown"
-    },
-    email: "david@example.com",
-    concern: "Shop renovation request",
-    createdAt: "2024-01-11T11:30:00Z"
-  }
-];
 
 const ShopOwnerQueries = () => {
   const { t } = useTranslation();
-  const [data, setData] = useState([]);
-  const [loader, setLoader] = useState(false);
-  const [body, setBody] = useState({
-    page: 1,
-    limit: 10,
-    search: "",
-    status: ""
+  const {
+    setBody,
+    body,
+    data,
+    loader,
+    deleteModel,
+    setDeleteModel,
+    paginationHandler,
+    searchHandler,
+    total,
+    deleteHandler,
+    statusChangeHandler,
+  } = dataHandler({
+    api: SHOP_OWNER_QUERIES_LIST,
+    dataToSet: (data) => data?.data?.data,
+    extraBody: {
+      userId: localStorage.getItem("_id"),
+    },
   });
-  const [total, setTotal] = useState(staticQueriesData.length);
-
-  useEffect(() => {
-    setLoader(true);
-    // Simulate API call
-    setTimeout(() => {
-      let filteredData = [...staticQueriesData];
-      
-      // Apply search filter
-      if (body.search) {
-        filteredData = filteredData.filter(item => 
-          item.user.userName.toLowerCase().includes(body.search.toLowerCase()) ||
-          item.email.toLowerCase().includes(body.search.toLowerCase()) ||
-          item.concern.toLowerCase().includes(body.search.toLowerCase())
-        );
-      }
-
-      setData(filteredData);
-      setTotal(filteredData.length);
-      setLoader(false);
-    }, 500);
-  }, [body]);
-
-  const paginationHandler = (page) => {
-    setBody(prev => ({ ...prev, page }));
-  };
-
-  const searchHandler = (search) => {
-    setBody(prev => ({ ...prev, search, page: 1 }));
-  };
 
   const column = [
     {
