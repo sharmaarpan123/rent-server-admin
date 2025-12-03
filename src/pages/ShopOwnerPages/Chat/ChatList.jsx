@@ -35,7 +35,14 @@ const ChatList = ({
         </InputGroup>
         <h5 className="mb-0 fw-bold">Recent Chats</h5>
       </Card.Header>
-      <Card.Body className="p-0" style={{ overflowY: "auto" , backgroundColor: "#ffffff" }}>
+      <Card.Body
+        className="p-0"
+        style={{
+          overflowY: "auto",
+          backgroundColor: "#ffffff",
+          maxHeight: "calc(100vh - 240px)",
+        }}
+      >
         {loading ? (
           <div className="text-center py-5">
             <Spinner animation="border" size="sm" />
