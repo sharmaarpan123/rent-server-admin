@@ -255,3 +255,7 @@ export const VIEW_SERVICE_CATEGORY = (data) =>
 // shop owner queries
 export const SHOP_OWNER_QUERIES_LIST = (data) =>
   Axios.post(API_URL.QUERIES_LIST, data);
+
+// Chat APIs
+export const CHAT_LIST = (data) => Axios.post(API_URL.CHAT_LIST, data);
+export const CHAT_HISTORY = (data) => Axios.post(API_URL.CHAT_HISTORY, data);

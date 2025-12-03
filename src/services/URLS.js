@@ -175,4 +175,8 @@ export default {
   UPDATE_SERVICE_CATEGORY: "/category/update",
   DELETE_SERVICE_CATEGORY: "/category/remove",
   VIEW_SERVICE_CATEGORY: "/category/view/",
+
+  // Chat APIs
+  CHAT_LIST: "/api/v1/admin/chatList",
+  CHAT_HISTORY: "/api/v1/admin/chatHistory",
 };

@@ -16,8 +16,6 @@ class Axios {
 
     const loginUserRole = localStorage.getItem("loginUserRole") || "";
 
-    console.log(loginUserRole, "loginUserRole");
-
     return {
       baseURL: `${API_URL}`,
       headers: {

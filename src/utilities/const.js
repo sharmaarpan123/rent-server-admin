@@ -1,11 +1,13 @@
 import URLS from "../services/URLS";
 import noImage from "../Assets/images/no-img.png";
+import dummyUserImage from "../Assets/images/user.png";
 
 export const paginationLimitArr = [5, 10, 20, 50, 100, 200, 500, 1000, 2000];
 
 export const superAdminCommission = 10;
 export const superAdminCommissionOnFullRefund = 2;
 export const noImagePlaceHolder = noImage;
+export const dummyUserPlaceHolder = dummyUserImage;
 
 export const ADMIN_ROLE_TYPE_ENUM = {
   SUPERADMIN: "superAdmin",
