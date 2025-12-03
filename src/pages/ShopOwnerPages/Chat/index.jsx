@@ -154,7 +154,11 @@ const ShopOwnerChat = () => {
       <Container fluid>
         <Row className="g-0">
           {/* Conversations List */}
-          <Col lg={4} className=" bg-light   p-4 rounded">
+          <Col
+            lg={4}
+            className=" bg-light   p-4"
+            
+          >
             <ChatList
               conversations={filteredConversations}
               selectedConversation={selectedConversation}

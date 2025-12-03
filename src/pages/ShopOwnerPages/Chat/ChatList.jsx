@@ -18,7 +18,7 @@ const ChatList = ({
   };
 
   return (
-    <Card className="h-100 rounded-0 border-0 bg-light">
+    <Card className="h-100  border-0 bg-light" stye={{ borderRadius: "50%" }}>
       <Card.Header className="bg-white border-bottom px-4 py-3">
         <InputGroup className="mb-3">
           <InputGroup.Text className="bg-white border-end-0">
