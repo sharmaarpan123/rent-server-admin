@@ -150,7 +150,7 @@ const ChatHistory = ({
                       backgroundColor: "#9e9e9e",
                     }}
                   >
-                    {getAvatarInitials("Shop Owner")}
+                   <img src={dummyUserPlaceHolder} alt="Shop Owner" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   </div>
                 )}
               </div>
@@ -158,36 +158,7 @@ const ChatHistory = ({
           </>
         )}
       </Card.Body>
-      <Card.Footer className="bg-white border-top px-4 py-3">
-        <Form onSubmit={handleSubmit}>
-          <div className="d-flex align-items-center gap-2">
-            <Form.Control
-              type="text"
-              placeholder="Type a message..."
-              value={newMessage}
-              onChange={(e) => onMessageChange(e.target.value)}
-              style={{
-                borderRadius: "25px",
-                border: "1px solid #e0e0e0",
-                padding: "10px 20px",
-              }}
-            />
-            <Button
-              type="submit"
-              className="rounded-circle d-flex align-items-center justify-content-center"
-              style={{
-                width: "45px",
-                height: "45px",
-                backgroundColor: "#e91e63",
-                border: "none",
-                padding: 0,
-              }}
-            >
-              <FiSend className="text-white" size={18} />
-            </Button>
-          </div>
-        </Form>
-      </Card.Footer>
+     
     </Card>
   );
 };
