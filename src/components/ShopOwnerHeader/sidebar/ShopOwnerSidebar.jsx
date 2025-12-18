@@ -68,6 +68,24 @@ const ShopOwnerSidebar = ({ sidebar, setSidebar }) => {
       ),
     },
     {
+      path: "/shop-owner/visitors",
+      name: "Visitors",
+      icon: () => (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7ZM12 13C15.866 13 19 16.134 19 20V21H5V20C5 16.134 8.134 13 12 13Z"
+            fill="currentColor"
+          />
+        </svg>
+      ),
+    },
+    {
       path: "/shop-owner/profile",
       name: "Profile",
       icon: () => (

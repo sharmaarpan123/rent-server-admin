@@ -9,6 +9,7 @@
   "notifications": "Notifications",
   "Profile": "Profile",
   "Chat": "Chat",
+  "Visitors": "Visitors",
 
   "editUser": "Edit User",
   "userDetails": "User Details",
@@ -69,6 +70,7 @@
   "createdAt": "Created at",
   "userStatus": "User status",
   "active": "Active",
+  "block": "Block",
   "gender": "Gender",
   "password": "Password",
   "cancel": "Cancel",
