@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Card, Form, InputGroup, Spinner } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { FiMoreVertical, FiSearch } from "react-icons/fi";
 import dummyUserPlaceHolder from "../../../Assets/images/user.png";
 
@@ -10,6 +11,7 @@ const ChatList = ({
   onSearch,
   loading,
 }) => {
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = (query) => {
@@ -26,14 +28,14 @@ const ChatList = ({
           </InputGroup.Text>
           <Form.Control
             type="text"
-            placeholder="Search conversations..."
+            placeholder={t("searchConversations")}
             value={searchQuery}
             onChange={(e) => handleSearch(e.target.value)}
             className="border-start-0"
             style={{ borderRadius: "8px" }}
           />
         </InputGroup>
-        <h5 className="mb-0 fw-bold">Recent Chats</h5>
+        <h5 className="mb-0 fw-bold">{t("recentChats")}</h5>
       </Card.Header>
       <Card.Body
         className="p-0"
@@ -49,7 +51,7 @@ const ChatList = ({
           </div>
         ) : conversations.length === 0 ? (
           <div className="text-center py-5 text-muted">
-            <p>No conversations found</p>
+            <p>{t("noConversationsFound")}</p>
           </div>
         ) : (
           conversations.map((conversation) => (

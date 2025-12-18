@@ -1,5 +1,6 @@
 import { Card, Form, Button, Spinner } from "react-bootstrap";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 import { FiSend, FiMoreVertical } from "react-icons/fi";
 import { dummyUserPlaceHolder } from "../../../utilities/const";
 
@@ -11,6 +12,7 @@ const ChatHistory = ({
   onSendMessage,
   loading,
 }) => {
+  const { t } = useTranslation();
   // Get avatar initials
   const getAvatarInitials = (name) => {
     return name.charAt(0).toUpperCase();
@@ -34,7 +36,7 @@ const ChatHistory = ({
       >
         <div className="d-flex align-items-center justify-content-center h-100">
           <div className="text-center text-muted">
-            <p>Select a conversation to start chatting</p>
+            <p>{t("selectConversationToStart")}</p>
           </div>
         </div>
       </Card>
@@ -92,7 +94,7 @@ const ChatHistory = ({
           </div>
         ) : messages.length === 0 ? (
           <div className="text-center py-5 text-muted">
-            <p>No messages yet. Start the conversation!</p>
+            <p>{t("noMessagesYet")}</p>
           </div>
         ) : (
           <>
@@ -150,7 +152,7 @@ const ChatHistory = ({
                       backgroundColor: "#9e9e9e",
                     }}
                   >
-                   <img src={dummyUserPlaceHolder} alt="Shop Owner" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                   <img src={dummyUserPlaceHolder} alt={t("shopOwner")} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   </div>
                 )}
               </div>

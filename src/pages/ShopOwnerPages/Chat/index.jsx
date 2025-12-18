@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { CHAT_HISTORY, CHAT_LIST } from "../../../services/ApiCalls";
 import ChatHistory from "./ChatHistory";
 import ChatList from "./ChatList";
 
 const limit = 10;
 const ShopOwnerChat = () => {
+  const { t } = useTranslation();
   const [conversations, setConversations] = useState([]);
   const [filteredConversations, setFilteredConversations] = useState([]);
   const [selectedConversation, setSelectedConversation] = useState(null);
@@ -30,7 +32,7 @@ const ShopOwnerChat = () => {
         const mappedConversations = chatList.map((item) => ({
           _id: item.userId,
           userId: item.userId,
-          userName: item.userName || "Unknown User",
+          userName: item.userName || t("unknownUser"),
           userTitle: "", // Not provided in API response
           userEmail: "", // Not provided in API response
           lastMessage: item.lastMessage || "",
@@ -76,7 +78,7 @@ const ShopOwnerChat = () => {
         const mappedMessages = chatHistory.map((item) => ({
           _id: item.messageId || item._id,
           senderId: item.sender?._id || "",
-          senderName: item.sender?.userName || "Unknown",
+          senderName: item.sender?.userName || t("unknown"),
           message: item.message || "",
           timestamp: item.createdAt || new Date().toISOString(),
           isOwn: item.selfMessage || false,
@@ -125,7 +127,7 @@ const ShopOwnerChat = () => {
     const newMsg = {
       _id: `msg${Date.now()}`,
       senderId: "shopOwner",
-      senderName: "Shop Owner",
+      senderName: t("shopOwner"),
       message: newMessage,
       timestamp: new Date().toISOString(),
       isOwn: true,

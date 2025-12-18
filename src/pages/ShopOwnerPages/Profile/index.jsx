@@ -49,8 +49,6 @@ const ShopOwnerProfile = () => {
     },
   });
 
-  console.log(user, "user");
-
   const onSubmit = async (data) => {
     setLoader(true);
 
@@ -58,7 +56,7 @@ const ShopOwnerProfile = () => {
     setTimeout(() => {
       setProfileData(data);
       setLoader(false);
-      successToast({ message: "Profile updated successfully!" });
+      successToast({ message: t("profileUpdatedSuccess") });
     }, 1000);
   };
 
@@ -69,30 +67,30 @@ const ShopOwnerProfile = () => {
           <Col lg={8}>
             <Card>
               <Card.Header>
-                <h4 className="mb-0">Shop Owner Profile</h4>
+                <h4 className="mb-0">{t("shopOwnerProfile")}</h4>
               </Card.Header>
               <Card.Body>
                 <Form onSubmit={handleSubmit(onSubmit)}>
                   <Row>
                     <Col md={6}>
                       <Form.Group className="mb-3">
-                        <Form.Label>User Name *</Form.Label>
+                        <Form.Label>{t("userNameLabel")} *</Form.Label>
                         <Form.Control
                           type="text"
                           {...register("userName")}
-                          isInvalid={!!errors.lastName}
+                          isInvalid={!!errors.userName}
                           readOnly
                         />
-                        {errors.lastName && (
+                        {errors.userName && (
                           <Form.Control.Feedback type="invalid">
-                            {errors.lastName.message}
+                            {errors.userName.message}
                           </Form.Control.Feedback>
                         )}
                       </Form.Group>
                     </Col>
                     <Col md={6}>
                       <Form.Group className="mb-3">
-                        <Form.Label>Email *</Form.Label>
+                        <Form.Label>{t("emailLabel")} *</Form.Label>
                         <Form.Control
                           type="email"
                           {...register("email")}

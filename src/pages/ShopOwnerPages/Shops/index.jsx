@@ -1,6 +1,7 @@
 import moment from "moment";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import CustomPagination from "../../../components/Common/CustomPagination";
 import Filter from "../../../components/Common/Filter";
 import TableActions from "../../../components/Common/TableActions";
@@ -10,6 +11,7 @@ import { SHOP_OWNER_SHOP_LIST } from "../../../services/ApiCalls";
 import { activeInactiveOptions } from "../../../utilities/const";
 
 const ShopOwnerShops = () => {
+  const { t } = useTranslation();
   const user = useSelector((state) => state?.login?.admin);
 
   const {
@@ -27,8 +29,6 @@ const ShopOwnerShops = () => {
     dependencies: ["userId"],
   });
 
-  console.log(data, "data");
-
   const column = [
     {
       head: "#",
@@ -38,14 +38,14 @@ const ShopOwnerShops = () => {
       },
     },
     {
-      head: "Shop Name",
+      head: t("shopName"),
       accessor: "name",
       component: (item, key, arr) => (
         <p className="m-0 themePink fw-sbold text-wrap">{item.name}</p>
       ),
     },
     {
-      head: "Status",
+      head: t("status"),
       accessor: "status",
       component: (item) => (
         <p
@@ -58,7 +58,7 @@ const ShopOwnerShops = () => {
             width: "fit-content",
           }}
         >
-          {item.status === "rented" ? "Rented" : "Available"}
+          {item.status === "rented" ? t("rented") : t("available")}
         </p>
       ),
     },
@@ -72,7 +72,7 @@ const ShopOwnerShops = () => {
     //   ),
     // },
     {
-      head: "Created Date",
+      head: t("createdDate"),
       accessor: "createdAt",
       component: (item, key, arr) => (
         <>{moment(item.createdAt).format("DD-MM-YYYY  hh:mm:ss A")}</>

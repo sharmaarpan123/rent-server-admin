@@ -48,27 +48,27 @@ const ShopOwnerDashboard = () => {
 
   const statsCards = [
     {
-      title: "Total Stores",
+      title: t("totalStores"),
       value: data.storeCount,
-      subtitle: "Active Stores",
+      subtitle: t("activeStores"),
       icon: <FaStore />,
       color: "#412800",
       bgGradient: "linear-gradient(135deg, #412800 0%, #71501a 100%)",
       iconBg: "rgba(65, 40, 0, 0.1)",
     },
     {
-      title: "Total Queries",
+      title: t("totalQueriesShopOwner"),
       value: data.queryCount,
-      subtitle: "Customer Queries",
+      subtitle: t("customerQueries"),
       icon: <FaQuestionCircle />,
       color: "#3c0760",
       bgGradient: "linear-gradient(135deg, #3c0760 0%, #5a0a8f 100%)",
       iconBg: "rgba(60, 7, 96, 0.1)",
     },
     {
-      title: "Visitor Count",
+      title: t("visitorCount"),
       value: data.shopVistorCount,
-      subtitle: "Total Visitor",
+      subtitle: t("totalVisitor"),
       icon: <FaUsers />,
       color: "#3c0760",
       bgGradient: "linear-gradient(135deg, #3c0760 0%, #5a0a8f 100%)",
@@ -81,9 +81,9 @@ const ShopOwnerDashboard = () => {
       <Container fluid>
         <Row className="mb-4">
           <Col xs={12} className="mb-3">
-            <h3 className="fw-bold themeClr mb-0">Dashboard Overview</h3>
+            <h3 className="fw-bold themeClr mb-0">{t("dashboardOverview")}</h3>
             <p className="text-muted mb-0">
-              Welcome back! Here's what's happening with your shops.
+              {t("welcomeBackMessage")}
             </p>
           </Col>
         </Row>
@@ -167,7 +167,7 @@ const ShopOwnerDashboard = () => {
               padding: "20px",
             }}>
               <div className="mb-3">
-                <h5 className="mb-0 fw-bold themeClr">Shop Visitors Over Time</h5>
+                <h5 className="mb-0 fw-bold themeClr">{t("shopVisitorsOverTime")}</h5>
               </div>
               <div>
                 <ShopOwnerAreaChart />
