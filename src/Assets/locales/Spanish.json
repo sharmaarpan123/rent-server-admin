@@ -1,9 +1,14 @@
 {
   "dashboard": "Tablero",
+  "Dashboard": "Tablero",
   "users": "Usuarios",
   "shops": "Tiendas",
+  "Shops": "Tiendas",
   "queries": "Consultas",
+  "Queries": "Consultas",
   "notifications": "Notificaciones",
+  "Profile": "Perfil",
+  "Chat": "Chat",
 
   "editUser": "Editar usuario",
   "userDetails": "Detalles del usuario",

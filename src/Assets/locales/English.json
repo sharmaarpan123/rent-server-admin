@@ -1,9 +1,14 @@
 {
   "dashboard": "Dashboard",
+  "Dashboard": "Dashboard",
   "users": "Users",
   "shops": "Shops",
+  "Shops": "Shops",
   "queries": "Queries",
+  "Queries": "Queries",
   "notifications": "Notifications",
+  "Profile": "Profile",
+  "Chat": "Chat",
 
   "editUser": "Edit User",
   "userDetails": "User Details",

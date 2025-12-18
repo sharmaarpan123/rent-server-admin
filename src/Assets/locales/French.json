@@ -1,9 +1,14 @@
 {
   "dashboard": "Tableau de bord",
+  "Dashboard": "Tableau de bord",
   "users": "Utilisateurs",
   "shops": "Magasins",
+  "Shops": "Magasins",
   "queries": "Requêtes",
+  "Queries": "Requêtes",
   "notifications": "Notifications",
+  "Profile": "Profil",
+  "Chat": "Chat",
 
   "editUser": "Modifier l'utilisateur",
   "userDetails": "Détails de l'utilisateur",
