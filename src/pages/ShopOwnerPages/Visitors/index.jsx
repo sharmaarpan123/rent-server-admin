@@ -67,15 +67,15 @@ const ShopOwnerVisitors = () => {
       ),
     },
 
-    {
-      head: t("action"),
-      accessor: "Action",
-      component: (item, ind) => (
-        <TableActions
-          viewLink={"/shop-owner/visitors/detail/" + item?._id}
-        />
-      ),
-    },
+    // {
+    //   head: t("action"),
+    //   accessor: "Action",
+    //   component: (item, ind) => (
+    //     <TableActions
+    //       viewLink={"/shop-owner/visitors/detail/" + item?._id}
+    //     />
+    //   ),
+    // },
   ];
 
   return (
